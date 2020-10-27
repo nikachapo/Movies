@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/movie_item_margin"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/itemPosterIV"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/movie_item_image_height"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/itemNameTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        tools:text="Name"
+        android:textColor="@color/def_text_color"
+        android:background="@drawable/text_bg"
+        android:textSize="@dimen/movie_item_name_text_size"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -14,4 +14,13 @@ data class MovieModel(
     @SerializedName("original_language") val originalLanguage: String,
     @SerializedName("vote_average") val voteAverage: Double,
     @SerializedName("vote_count") val voteCount: Int
-)
+) {
+
+    val posterUrl: String
+        get() = BASE_IMG_PATH + posterPath
+
+
+    companion object {
+        private const val BASE_IMG_PATH = "https://image.tmdb.org/t/p/w500/"
+    }
+}

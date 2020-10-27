@@ -43,7 +43,9 @@ ext.versions = [
         /////////////Test//////////////
         "junit"           : "4.13.1",
         "junitAndroidx"   : "1.1.2",
-        "espresso"        : "3.3.0"
+        "espresso"        : "3.3.0",
+        //////////////////////////////
+        "glide"           : "4.11.0"
 ]
 
 ext.deps = [
@@ -76,10 +78,14 @@ ext.deps = [
         "tests"     : [
                 "junit"        : "junit:junit:${versions.junit}",
                 "junitAndroidx": "androidx.test.ext:junit:${versions.junitAndroidx}",
-                "truth"     : "com.google.truth:truth:${versions.truth}",
+                "truth"        : "com.google.truth:truth:${versions.truth}",
                 "espresso"     : "androidx.test.espresso:espresso-core:${versions.espresso}"
         ],
-        "material"  : "com.google.android.material:material:${versions.material}"
+        "material"  : "com.google.android.material:material:${versions.material}",
+        "glide"     : [
+                "glide"   : "com.github.bumptech.glide:glide:${versions.glide}",
+                "compiler": "com.github.bumptech.glide:compiler:${versions.glide}"
+        ]
 ]
 
 

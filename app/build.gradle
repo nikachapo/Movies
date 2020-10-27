@@ -18,8 +18,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    viewBinding {
-        enabled true
+    buildFeatures {
+        viewBinding = true
     }
 
     buildTypes {
@@ -48,6 +48,8 @@ dependencies {
     androidTestImplementation deps.tests.junitAndroidx
     androidTestImplementation deps.tests.espresso
 
+
+
     implementation deps.retrofit.core
     implementation deps.retrofit.gsonConverter
 //    implementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
@@ -56,7 +58,12 @@ dependencies {
     implementation deps.coroutines.android
     implementation deps.coroutines.test
 
+    implementation deps.androidx.livedata
+    implementation deps.androidx.viewmodel
+
     implementation deps.androidx.paging
     implementation deps.material
 
+    implementation deps.glide.glide
+    implementation deps.glide.compiler
 }
