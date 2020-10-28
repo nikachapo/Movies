@@ -26,4 +26,8 @@ class MainViewModel(private val repository: MovieRepository) : ViewModel() {
         return newResult
     }
 
+    override fun onCleared() {
+        super.onCleared()
+    }
+
 }

@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.api.MoviesService
 import com.example.movies.data.MovieRepository
 import com.example.movies.databinding.ActivityMainBinding
@@ -23,7 +24,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
-    private val adapter = MoviesAdapter()
+    private val adapter = MoviesAdapter().also {
+        it.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+    }
 
     private var searchJob: Job? = null
 
@@ -89,7 +92,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun initSearch(query: String) {
         binding.searchRepo.setText(query)
