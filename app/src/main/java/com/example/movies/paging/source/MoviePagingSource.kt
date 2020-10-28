@@ -1,15 +1,12 @@
 package com.example.movies.paging.source
 
 import androidx.paging.PagingSource
-import com.example.movies.api.MoviesService
 import com.example.movies.model.MovieModel
 import com.example.movies.paging.source.movies_response.MoviesResponseSource
 import retrofit2.HttpException
 import java.io.IOException
 
-class MoviePagingSource(
-    private val responseSource: MoviesResponseSource
-) :
+class MoviePagingSource(private val responseSource: MoviesResponseSource) :
     PagingSource<Int, MovieModel>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieModel> {

@@ -1,4 +1,4 @@
-package com.example.movies
+package com.example.movies.ui
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -11,16 +11,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movies.api.MoviesService
-import com.example.movies.data.MovieRepository
+import com.example.movies.App
 import com.example.movies.databinding.ActivityMainBinding
 import com.example.movies.paging.MovieLoadStateAdapter
 import com.example.movies.paging.MoviesAdapter
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
@@ -33,16 +36,16 @@ class MainActivity : AppCompatActivity() {
     private var getPopularMoviesJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        (application as App).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.retryButton.setOnClickListener { adapter.retry() }
 
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelFactory(MovieRepository(MoviesService.create()))
-        ).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
 
         initAdapter()
         savedInstanceState?.getString(LAST_SEARCH_QUERY)?.also {

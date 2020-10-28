@@ -9,8 +9,9 @@ import com.example.movies.paging.source.MoviePagingSource
 import com.example.movies.paging.source.movies_response.PopularMoviesResponseSource
 import com.example.movies.paging.source.movies_response.SearchMovieResponseSource
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class MovieRepository(private val moviesService: MoviesService) {
+class MovieRepository @Inject constructor(private val moviesService: MoviesService) {
 
     fun getPopularMovies(): Flow<PagingData<MovieModel>> {
         return Pager(
