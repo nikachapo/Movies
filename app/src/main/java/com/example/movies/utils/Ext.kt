@@ -2,10 +2,11 @@ package com.example.movies.utils
 
 import android.net.Uri
 import android.widget.ImageView
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
+
 
 fun ImageView.loadImage(uri: Uri?) {
-    Glide.with(context)
+    Picasso.get()
         .load(uri)
         .into(this)
 }

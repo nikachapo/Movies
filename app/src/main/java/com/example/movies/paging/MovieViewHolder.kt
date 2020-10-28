@@ -19,6 +19,7 @@ package com.example.movies.paging
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.movies.R
 import com.example.movies.databinding.ItemMovieBinding
 import com.example.movies.model.MovieModel
 import com.example.movies.utils.loadImage
@@ -47,8 +48,10 @@ class MovieViewHolder(private val binding: ItemMovieBinding) :
 
     companion object {
         fun create(parent: ViewGroup): MovieViewHolder {
-            val view = ItemMovieBinding.inflate(LayoutInflater.from(parent.context))
-            return MovieViewHolder(view)
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_movie, parent, false)
+            val binding = ItemMovieBinding.bind(view)
+            return MovieViewHolder(binding)
         }
     }
 }

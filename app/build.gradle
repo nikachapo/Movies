@@ -28,6 +28,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -48,8 +54,6 @@ dependencies {
     androidTestImplementation deps.tests.junitAndroidx
     androidTestImplementation deps.tests.espresso
 
-
-
     implementation deps.retrofit.core
     implementation deps.retrofit.gsonConverter
 //    implementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
@@ -64,6 +68,6 @@ dependencies {
     implementation deps.androidx.paging
     implementation deps.material
 
-    implementation deps.glide.glide
-    implementation deps.glide.compiler
+    implementation deps.picasso
+
 }

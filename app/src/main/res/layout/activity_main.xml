@@ -35,6 +35,7 @@
         android:layout_height="0dp"
         android:paddingVertical="@dimen/row_item_margin_vertical"
         android:scrollbars="vertical"
+        tools:listitem="@layout/item_movie"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

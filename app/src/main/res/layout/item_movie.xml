@@ -9,6 +9,7 @@
         android:id="@+id/itemPosterIV"
         android:layout_width="match_parent"
         android:layout_height="@dimen/movie_item_image_height"
+        android:scaleType="centerCrop"
         tools:src="@mipmap/ic_launcher" />
 
     <TextView

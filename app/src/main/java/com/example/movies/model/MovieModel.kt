@@ -21,6 +21,6 @@ data class MovieModel(
 
 
     companion object {
-        private const val BASE_IMG_PATH = "https://image.tmdb.org/t/p/w500/"
+        private const val BASE_IMG_PATH = "https://image.tmdb.org/t/p/w200"
     }
 }
