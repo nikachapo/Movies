@@ -28,7 +28,7 @@ class MoviesAdapter : PagingDataAdapter<MovieModel, RecyclerView.ViewHolder>(MOV
     companion object {
         private val MOVIE_COMPARATOR = object : DiffUtil.ItemCallback<MovieModel>() {
             override fun areItemsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean =
-                oldItem.name == newItem.name
+                oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean =
                 oldItem == newItem
