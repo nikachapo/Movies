@@ -17,8 +17,8 @@ import com.example.movies.databinding.ActivityMainBinding
 import com.example.movies.paging.MovieLoadStateAdapter
 import com.example.movies.paging.MoviesAdapter
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,8 +27,10 @@ class MainActivity : AppCompatActivity() {
     private val adapter = MoviesAdapter().also {
         it.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
+    private var lastSearchQuery = ""
 
     private var searchJob: Job? = null
+    private var getPopularMoviesJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,14 +39,32 @@ class MainActivity : AppCompatActivity() {
 
         binding.retryButton.setOnClickListener { adapter.retry() }
 
-        viewModel = ViewModelProvider(this,
-            ViewModelFactory(MovieRepository(MoviesService.create()))).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(MovieRepository(MoviesService.create()))
+        ).get(MainViewModel::class.java)
 
         initAdapter()
-        val query = savedInstanceState?.getString(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
-        search(query)
-        initSearch(query)
+        savedInstanceState?.getString(LAST_SEARCH_QUERY)?.also {
+            if (it.isEmpty()) {
+                getPopularMovies()
+                return@also
+            }
+            lastSearchQuery = it
+            search(it)
+        } ?: getPopularMovies()
 
+        initSearch(lastSearchQuery)
+
+    }
+
+    private fun getPopularMovies() {
+        getPopularMoviesJob?.cancel()
+        getPopularMoviesJob = lifecycleScope.launch {
+            viewModel.getPopularMovies().collect {
+                adapter.submitData(it)
+            }
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -95,7 +115,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initSearch(query: String) {
         binding.searchRepo.setText(query)
-
         binding.searchRepo.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_GO) {
                 updateRepoListFromInput()
@@ -115,10 +134,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun search(query: String) {
-        // Make sure we cancel the previous job before creating a new one
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
-            viewModel.searchRepo(query).collect {
+            viewModel.searchMovie(query).collect {
                 adapter.submitData(it)
             }
         }
@@ -135,6 +153,5 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val LAST_SEARCH_QUERY: String = "last_search_query"
-        private const val DEFAULT_QUERY = "Android"
     }
 }

@@ -14,20 +14,30 @@ class MainViewModel(private val repository: MovieRepository) : ViewModel() {
 
     private var currentSearchResult: Flow<PagingData<MovieModel>>? = null
 
-    fun searchRepo(queryString: String): Flow<PagingData<MovieModel>> {
+    fun searchMovie(queryString: String): Flow<PagingData<MovieModel>> {
         val lastResult = currentSearchResult
         if (queryString == currentQueryValue && lastResult != null) {
             return lastResult
         }
         currentQueryValue = queryString
-        val newResult: Flow<PagingData<MovieModel>> = repository.getMovies(queryString)
+        return setCurrentResult(repository.searchMovies(queryString))
+    }
+
+    private fun setCurrentResult(
+        movies: Flow<PagingData<MovieModel>>
+    ): Flow<PagingData<MovieModel>> {
+        val newResult: Flow<PagingData<MovieModel>> = movies
             .cachedIn(viewModelScope)
         currentSearchResult = newResult
         return newResult
     }
 
-    override fun onCleared() {
-        super.onCleared()
+    fun getPopularMovies(): Flow<PagingData<MovieModel>> {
+        return if (currentSearchResult == null || currentQueryValue == null) {
+            setCurrentResult(repository.getPopularMovies())
+        } else {
+            currentSearchResult!!
+        }
     }
 
 }

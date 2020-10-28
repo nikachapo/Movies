@@ -1,26 +1,25 @@
-package com.example.movies.paging
+package com.example.movies.paging.source
 
 import androidx.paging.PagingSource
 import com.example.movies.api.MoviesService
 import com.example.movies.model.MovieModel
+import com.example.movies.paging.source.movies_response.MoviesResponseSource
 import retrofit2.HttpException
 import java.io.IOException
 
-private const val GITHUB_STARTING_PAGE_INDEX = 1
+class MoviePagingSource(
+    private val responseSource: MoviesResponseSource
+) :
+    PagingSource<Int, MovieModel>() {
 
-class MoviesPagingSource(
-    private val service: MoviesService,
-    private val query: String
-) : PagingSource<Int, MovieModel>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieModel> {
-        val position = params.key ?: GITHUB_STARTING_PAGE_INDEX
-        val apiQuery = query
+
+        val position = params.key ?: STARTING_PAGE_INDEX
         return try {
-            val response = service.searchMovie(apiQuery, position)
-            val movies = response.movies
+            val movies = responseSource.getResponse(position).movies
             LoadResult.Page(
                 data = movies,
-                prevKey = if (position == GITHUB_STARTING_PAGE_INDEX) null else position - 1,
+                prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,
                 nextKey = if (movies.isEmpty()) null else position + 1
             )
         } catch (exception: IOException) {
@@ -28,6 +27,11 @@ class MoviesPagingSource(
         } catch (exception: HttpException) {
             return LoadResult.Error(exception)
         }
+
+    }
+
+    companion object {
+        private const val STARTING_PAGE_INDEX = 1
     }
 
 }
