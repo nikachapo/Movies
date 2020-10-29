@@ -8,7 +8,7 @@ interface MoviesService {
 
     @GET("tv/popular")
     suspend fun getPopularTVShows(
-        @Query("page") page: Int,
+        @Query("page") page: Int? = null,
         @Query("api_key") key: String = "b96423827404b3c13297beb0e141ba86"
     ): MovieResponseModel
 

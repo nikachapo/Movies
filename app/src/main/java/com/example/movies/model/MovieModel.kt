@@ -1,26 +1,34 @@
 package com.example.movies.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "movies_table")
+@TypeConverters()
 data class MovieModel(
-    val id: Int,
-    val name: String,
-    val overview: String,
-    @SerializedName("backdrop_path") val backgroundPath: String,
-    @SerializedName("poster_path") val posterPath: String,
-    @SerializedName("first_air_date") val firstAirDate: String,
-    @SerializedName("genre_ids") val genreIds: List<Int>,
-    @SerializedName("origin_country") val originCountry: List<String>,
-    @SerializedName("original_language") val originalLanguage: String,
-    @SerializedName("vote_average") val voteAverage: Double,
-    @SerializedName("vote_count") val voteCount: Int
+    @PrimaryKey
+    @SerializedName("id") val id: Long,
+    @SerializedName("name") val name: String?,
+    @SerializedName("overview") val overview: String?,
+    @SerializedName("backdrop_path") val backgroundPath: String?,
+    @SerializedName("poster_path") val posterPath: String?,
+    @SerializedName("first_air_date") val firstAirDate: String?,
+    @SerializedName("genre_ids") val genreIds: List<Long>?,
+    @SerializedName("original_language") val originalLanguage: String?,
+    @SerializedName("vote_average") val voteAverage: Double?,
+    @SerializedName("vote_count") val voteCount: Int?
 ) {
+
+    @SerializedName("page")
+    var page: Int = 0
+
+    @SerializedName("next_page")
+    var nextPage: Int? = null
 
     val posterUrl: String
         get() = BASE_IMG_PATH + posterPath
-
-
-    companion object {
-        private const val BASE_IMG_PATH = "https://image.tmdb.org/t/p/w200"
-    }
 }
+
+private const val BASE_IMG_PATH = "https://image.tmdb.org/t/p/w200"

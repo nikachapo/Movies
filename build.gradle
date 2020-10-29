@@ -45,7 +45,8 @@ ext.versions = [
         "junitAndroidx"   : "1.1.2",
         "espresso"        : "3.3.0",
         //////////////////////////////
-        "picasso"         : "2.71828"
+        "picasso"         : "2.71828",
+        "room" : "2.3.0-alpha02"
 ]
 
 ext.deps = [
@@ -80,6 +81,11 @@ ext.deps = [
                 "junitAndroidx": "androidx.test.ext:junit:${versions.junitAndroidx}",
                 "truth"        : "com.google.truth:truth:${versions.truth}",
                 "espresso"     : "androidx.test.espresso:espresso-core:${versions.espresso}"
+        ],
+        "room" : [
+                "runtime" : "androidx.room:room-runtime:${versions.room}",
+                "core" : "androidx.room:room-ktx:${versions.room}",
+                "compiler" : "androidx.room:room-compiler:${versions.room}"
         ],
         "material"  : "com.google.android.material:material:${versions.material}",
         "picasso"   : "com.squareup.picasso:picasso:${versions.picasso}"

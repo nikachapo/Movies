@@ -5,4 +5,5 @@
     <dimen name="movie_item_name_text_size">24sp</dimen>
     <dimen name="error_text_size">16sp</dimen>
     <dimen name="movie_item_margin">8dp</dimen>
+    <dimen name="card_radius">12dp</dimen>
 </resources>

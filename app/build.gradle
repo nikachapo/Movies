@@ -71,6 +71,10 @@ dependencies {
     implementation deps.androidx.paging
     implementation deps.material
 
+    implementation deps.room.core
+    implementation deps.room.runtime
+    kapt deps.room.compiler
+
     implementation deps.picasso
 
 }

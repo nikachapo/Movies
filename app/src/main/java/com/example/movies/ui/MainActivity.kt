@@ -15,9 +15,11 @@ import com.example.movies.App
 import com.example.movies.databinding.ActivityMainBinding
 import com.example.movies.paging.MovieLoadStateAdapter
 import com.example.movies.paging.MoviesAdapter
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -84,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             if (loadState.refresh !is LoadState.NotLoading) {
                 // We're refreshing: either loading or we had an error
                 // So we can hide the list
-                binding.list.visibility = View.GONE
+//                binding.list.visibility = View.GONE
                 binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
                 binding.retryButton.isVisible = loadState.refresh is LoadState.Error
             } else {
