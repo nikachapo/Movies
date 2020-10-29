@@ -24,6 +24,14 @@ class MainViewModel @Inject constructor(private val repository: MovieRepository)
         return setCurrentResult(repository.searchMovies(queryString))
     }
 
+    fun getPopularMovies(): Flow<PagingData<MovieModel>> {
+        return if (currentSearchResult == null) {
+            setCurrentResult(repository.getPopularMovies())
+        } else {
+            currentSearchResult!!
+        }
+    }
+
     private fun setCurrentResult(
         movies: Flow<PagingData<MovieModel>>
     ): Flow<PagingData<MovieModel>> {
@@ -31,14 +39,6 @@ class MainViewModel @Inject constructor(private val repository: MovieRepository)
             .cachedIn(viewModelScope)
         currentSearchResult = newResult
         return newResult
-    }
-
-    fun getPopularMovies(): Flow<PagingData<MovieModel>> {
-        return if (currentSearchResult == null || currentQueryValue == null) {
-            setCurrentResult(repository.getPopularMovies())
-        } else {
-            currentSearchResult!!
-        }
     }
 
 }
