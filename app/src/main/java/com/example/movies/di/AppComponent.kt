@@ -3,6 +3,7 @@ package com.example.movies.di
 import android.content.Context
 import com.example.movies.di.view_model.ViewModelModule
 import com.example.movies.ui.MainActivity
+import com.example.movies.ui.PopularTVShowsFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -19,5 +20,5 @@ interface AppComponent {
     }
 
     fun inject(mainActivity: MainActivity)
-
+    fun inject(popularTVShowsFragment: PopularTVShowsFragment)
 }

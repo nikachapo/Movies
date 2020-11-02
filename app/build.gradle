@@ -50,6 +50,7 @@ dependencies {
     implementation deps.androidx.appcompat
     implementation deps.material
     implementation deps.androidx.constraintlayout
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation deps.tests.junit
     androidTestImplementation deps.tests.junitAndroidx
     androidTestImplementation deps.tests.espresso

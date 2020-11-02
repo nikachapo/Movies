@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    app:cardBackgroundColor="@android:color/transparent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/movie_item_margin"
     app:cardCornerRadius="@dimen/card_radius"
@@ -11,8 +12,23 @@
         android:id="@+id/itemPosterIV"
         android:layout_width="match_parent"
         android:layout_height="@dimen/movie_item_image_height"
-        android:scaleType="centerCrop"
-        tools:src="@mipmap/ic_launcher" />
+        android:scaleType="fitCenter"
+        tools:src="@mipmap/ic_launcher"
+        android:background="@drawable/item_bg" />
+
+    <TextView
+        android:id="@+id/item_rating_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="7.8"
+        android:layout_gravity="end"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/imdb_rate_margin_to_edge"
+        android:layout_marginTop="@dimen/imdb_rate_margin_to_edge"
+        android:textSize="@dimen/imdb_rate_text_size"
+        android:textColor="@color/def_text_color"
+        app:drawableTopCompat="@mipmap/ic_imdb" />
 
     <TextView
         android:id="@+id/itemNameTV"
