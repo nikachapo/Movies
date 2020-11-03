@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/popularTVShowsListContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.PopularTVShowsFragment" />
+    tools:context=".ui.popular_tv_shows.PopularTVShowsFragment">
+
+
+    <FrameLayout
+        android:id="@+id/popularTVShowsListContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/changeListShowTypeIV"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/margit_to_main_edge"
+        android:layout_marginEnd="@dimen/margit_to_main_edge"
+        tools:src="@drawable/ic_linear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</FrameLayout>

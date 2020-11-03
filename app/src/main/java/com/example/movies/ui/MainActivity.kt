@@ -7,7 +7,7 @@ import com.example.movies.App
 import com.example.movies.R
 import com.example.movies.databinding.ActivityMainBinding
 import com.example.movies.di.AppComponent
-import dagger.Component
+import com.example.movies.ui.popular_tv_shows.PopularTVShowsFragment
 import kotlinx.coroutines.Job
 import javax.inject.Inject
 

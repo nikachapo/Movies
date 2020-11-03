@@ -22,7 +22,7 @@ import java.io.Serializable
 @Suppress("UNCHECKED_CAST")
 class MoviesListFragment : Fragment(), MovieListTemplate {
 
-    private lateinit var layoutManager: RecyclerView.LayoutManager
+    private lateinit var listLayoutManager: RecyclerView.LayoutManager
     override lateinit var mView: View
     override val binding: FragmentMoviesListBinding by lazy { FragmentMoviesListBinding.bind(mView) }
     private val adapter = MoviesAdapter().also {
@@ -37,14 +37,9 @@ class MoviesListFragment : Fragment(), MovieListTemplate {
 
     override fun handleArguments() {
         arguments?.let {
-            val orientation = when (it.getSerializable(ARG_ORIENTATION) as Orientation) {
-                Orientation.VERTICAL -> LinearLayoutManager.VERTICAL
-                Orientation.HORIZONTAL -> LinearLayoutManager.HORIZONTAL
-            }
-            layoutManager = when (it.getSerializable(ARG_LAYOUT_MANAGER) as LayoutManager) {
-                LayoutManager.LINEAR -> LinearLayoutManager(context, orientation, false)
-                LayoutManager.GRID -> GridLayoutManager(context, 2)
-            }
+            val orientation = it.getSerializable(ARG_ORIENTATION) as Orientation
+            val layoutManager = it.getSerializable(ARG_LAYOUT_MANAGER) as LayoutManager
+            changeLayoutManager(layoutManager, orientation)
         }
     }
 
@@ -59,8 +54,20 @@ class MoviesListFragment : Fragment(), MovieListTemplate {
         adapter.submitData(data)
     }
 
+    override fun changeLayoutManager(currentManager: LayoutManager, orientation: Orientation) {
+        val mOrientation = when (orientation) {
+            Orientation.VERTICAL -> LinearLayoutManager.VERTICAL
+            Orientation.HORIZONTAL -> LinearLayoutManager.HORIZONTAL
+        }
+        listLayoutManager = when (currentManager) {
+            LayoutManager.LINEAR -> LinearLayoutManager(context, mOrientation, false)
+            LayoutManager.GRID -> GridLayoutManager(context, 2)
+        }
+        if (::mView.isInitialized) binding.list.layoutManager = listLayoutManager
+    }
+
     override fun setUpViews() {
-        binding.list.layoutManager = layoutManager
+        binding.list.layoutManager = listLayoutManager
         binding.retryButton.setOnClickListener { adapter.retry() }
     }
 
@@ -71,18 +78,18 @@ class MoviesListFragment : Fragment(), MovieListTemplate {
         )
         adapter.addLoadStateListener { loadState ->
             if (loadState.refresh !is LoadState.NotLoading) {
-                // We're refreshing: either loading or we had an error
-                // So we can hide the list
-                // binding.list.visibility = View.GONE
-                binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
-                binding.retryButton.isVisible = loadState.refresh is LoadState.Error
+                if (adapter.itemCount == 0) {
+                    binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
+                    binding.retryButton.isVisible = loadState.refresh is LoadState.Error
+                } else {
+                    binding.progressBar.visibility = View.GONE
+                    binding.retryButton.visibility = View.GONE
+                }
             } else {
-                // We're not actively refreshing
-                // So we should show the list
                 binding.list.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.GONE
                 binding.retryButton.visibility = View.GONE
-                // If we have an error, show a toast
+
                 val errorState = when {
                     loadState.append is LoadState.Error -> {
                         loadState.append as LoadState.Error

@@ -28,4 +28,8 @@ interface MovieListTemplate : LifecycleObserver {
     fun handleArguments()
 
     suspend fun submitData(data: PagingData<MovieModel>)
+    fun changeLayoutManager(
+        currentManager: LayoutManager,
+        orientation: Orientation = Orientation.VERTICAL
+    )
 }

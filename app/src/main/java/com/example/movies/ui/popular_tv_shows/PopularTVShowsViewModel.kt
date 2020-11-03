@@ -1,4 +1,4 @@
-package com.example.movies.ui
+package com.example.movies.ui.popular_tv_shows
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

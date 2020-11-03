@@ -1,44 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    app:cardBackgroundColor="@android:color/transparent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/movie_item_margin"
-    app:cardCornerRadius="@dimen/card_radius"
-    android:layout_height="wrap_content">
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="@dimen/card_radius">
 
-    <ImageView
-        android:id="@+id/itemPosterIV"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/movie_item_image_height"
-        android:scaleType="fitCenter"
-        tools:src="@mipmap/ic_launcher"
-        android:background="@drawable/item_bg" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/item_rating_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="7.8"
-        android:layout_gravity="end"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginEnd="@dimen/imdb_rate_margin_to_edge"
-        android:layout_marginTop="@dimen/imdb_rate_margin_to_edge"
-        android:textSize="@dimen/imdb_rate_text_size"
-        android:textColor="@color/def_text_color"
-        app:drawableTopCompat="@mipmap/ic_imdb" />
+        <ImageView
+            android:id="@+id/itemPosterIV"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/movie_item_image_height"
+            android:scaleType="fitCenter"
+            tools:src="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/itemNameTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:gravity="center_horizontal"
-        tools:text="Name"
-        android:textColor="@color/def_text_color"
-        android:background="@drawable/text_bg"
-        android:textSize="@dimen/movie_item_name_text_size" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/item_top_layer" />
 
+        <TextView
+            android:id="@+id/item_rating_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/imdb_rate_margin_to_edge"
+            android:layout_marginEnd="@dimen/imdb_rate_margin_to_edge"
+            android:gravity="center"
+            android:textColor="@color/def_text_color"
+            android:textSize="@dimen/imdb_rate_text_size"
+            android:textStyle="bold"
+            app:drawableTopCompat="@mipmap/ic_imdb"
+            tools:text="7.8" />
+
+        <TextView
+            android:id="@+id/itemNameTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/text_bg"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:maxLines="2"
+            android:textColor="@color/def_text_color"
+            android:textSize="@dimen/movie_item_name_text_size"
+            tools:text="Name"
+            android:paddingStart="@dimen/text_view_padding"
+            android:paddingEnd="@dimen/text_view_padding" />
+    </FrameLayout>
 </androidx.cardview.widget.CardView>

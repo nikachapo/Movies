@@ -3,7 +3,7 @@ package com.example.movies.di
 import android.content.Context
 import com.example.movies.di.view_model.ViewModelModule
 import com.example.movies.ui.MainActivity
-import com.example.movies.ui.PopularTVShowsFragment
+import com.example.movies.ui.popular_tv_shows.PopularTVShowsFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
