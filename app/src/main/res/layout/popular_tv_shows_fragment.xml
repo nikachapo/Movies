@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.popular_tv_shows.PopularTVShowsFragment">
 
-
     <FrameLayout
         android:id="@+id/popularTVShowsListContainer"
         android:layout_width="match_parent"

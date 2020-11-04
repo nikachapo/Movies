@@ -1,28 +1,22 @@
 package com.example.movies.ui
 
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.movies.App
 import com.example.movies.R
 import com.example.movies.databinding.ActivityMainBinding
 import com.example.movies.di.AppComponent
 import com.example.movies.ui.popular_tv_shows.PopularTVShowsFragment
-import kotlinx.coroutines.Job
-import javax.inject.Inject
+import com.example.movies.ui.search_tv_shows.SearchTVShowsFragment
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var factory: ViewModelProvider.Factory
-
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainViewModel
-    private var lastSearchQuery = ""
-    private var searchJob: Job? = null
     lateinit var appComponent: AppComponent
+    private var searching = false
 
-    private var popularTVShowsFragment: PopularTVShowsFragment? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent = (application as App).appComponent
         appComponent.inject(this)
@@ -31,67 +25,48 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
+        setSupportActionBar(binding.toolbarLayout.searchToolbar)
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.mainContainer, PopularTVShowsFragment.newInstance())
                 .commit()
         } else {
-            popularTVShowsFragment =
-                supportFragmentManager.findFragmentById(R.id.mainContainer) as PopularTVShowsFragment?
+            searching = savedInstanceState.getBoolean(EXTRA_IS_SEARCHING)
+            if (searching) {
+                binding.toolbarLayout.searchMovieEt.visibility = View.VISIBLE
+                binding.toolbarLayout.searchBtn.visibility = View.GONE
+            }
         }
 
-
-//        initSearch(lastSearchQuery)
-
+        binding.toolbarLayout.searchBtn.setOnClickListener {
+            searching = true
+            binding.toolbarLayout.searchMovieEt.visibility = View.VISIBLE
+            binding.toolbarLayout.searchBtn.visibility = View.GONE
+            supportFragmentManager.beginTransaction()
+                .add(R.id.mainContainer, SearchTVShowsFragment.newInstance())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(LAST_SEARCH_QUERY, lastSearchQuery.trim())
+        outState.putBoolean(EXTRA_IS_SEARCHING, searching)
     }
 
-//    private fun initSearch(query: String) {
-//        binding.searchRepo.setText(query)
-//        binding.searchRepo.setOnEditorActionListener { _, actionId, _ ->
-//            if (actionId == EditorInfo.IME_ACTION_GO) {
-//                updateRepoListFromInput()
-//                true
-//            } else {
-//                false
-//            }
-//        }
-//        binding.searchRepo.setOnKeyListener { _, keyCode, event ->
-//            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-//                updateRepoListFromInput()
-//                true
-//            } else {
-//                false
-//            }
-//        }
-//    }
-
-//    private fun search(query: String) {
-//        lastSearchQuery = query
-//        searchJob?.cancel()
-//        searchJob = lifecycleScope.launch {
-//            viewModel.searchMovie(query).collect {
-//                adapter.submitData(it)
-//            }
-//        }
-//    }
-//
-//    private fun updateRepoListFromInput() {
-//        binding.searchRepo.text.trim().let {
-//            if (it.isNotEmpty()) {
-//                binding.list.scrollToPosition(0)
-//                search(it.toString())
-//            }
-//        }
-//    }
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            binding.toolbarLayout.searchMovieEt.visibility = View.GONE
+            binding.toolbarLayout.searchBtn.visibility = View.VISIBLE
+            supportFragmentManager.popBackStack()
+            searching = false
+        } else {
+            super.onBackPressed()
+        }
+    }
 
     companion object {
-        private const val LAST_SEARCH_QUERY: String = "last_search_query"
+        private const val EXTRA_IS_SEARCHING = "searching"
     }
 }

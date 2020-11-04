@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,22 +21,38 @@ import com.example.movies.paging.MoviesAdapter
 import java.io.Serializable
 
 @Suppress("UNCHECKED_CAST")
-class MoviesListFragment : Fragment(), MovieListTemplate {
+class MoviesListFragment : Fragment(), MoviesListTemplate {
 
     private lateinit var listLayoutManager: RecyclerView.LayoutManager
+    private lateinit var currentLayoutManager: LayoutManager
+    private lateinit var currentOrientation: Orientation
     override lateinit var mView: View
     override val binding: FragmentMoviesListBinding by lazy { FragmentMoviesListBinding.bind(mView) }
-    private val adapter = MoviesAdapter().also {
-        it.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+    private val adapter = MoviesAdapter().apply {
+        stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        handleArguments()
-        lifecycle.addObserver(this)
+        handleArguments(arguments)
     }
 
-    override fun handleArguments() {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        mView = inflater.inflate(R.layout.fragment_movies_list, container, false)
+        setUpViews()
+        initAdapter()
+        return mView
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(ARG_LAYOUT_MANAGER, currentLayoutManager)
+        outState.putSerializable(ARG_ORIENTATION, currentOrientation)
+    }
+
+    override fun handleArguments(arguments: Bundle?) {
         arguments?.let {
             val orientation = it.getSerializable(ARG_ORIENTATION) as Orientation
             val layoutManager = it.getSerializable(ARG_LAYOUT_MANAGER) as LayoutManager
@@ -43,27 +60,28 @@ class MoviesListFragment : Fragment(), MovieListTemplate {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        mView = inflater.inflate(R.layout.fragment_movies_list, container, false)
-        return mView
-    }
-
     override suspend fun submitData(data: PagingData<MovieModel>) {
         adapter.submitData(data)
     }
 
+    override fun scrollToTop() {
+        binding.list.scrollToPosition(0)
+    }
+
     override fun changeLayoutManager(currentManager: LayoutManager, orientation: Orientation) {
-        val mOrientation = when (orientation) {
+        currentOrientation = orientation
+        val mOrientation = when (currentOrientation) {
             Orientation.VERTICAL -> LinearLayoutManager.VERTICAL
             Orientation.HORIZONTAL -> LinearLayoutManager.HORIZONTAL
         }
+        currentLayoutManager = currentManager
         listLayoutManager = when (currentManager) {
             LayoutManager.LINEAR -> LinearLayoutManager(context, mOrientation, false)
             LayoutManager.GRID -> GridLayoutManager(context, 2)
         }
-        if (::mView.isInitialized) binding.list.layoutManager = listLayoutManager
+        if (::mView.isInitialized) {
+            binding.list.layoutManager = listLayoutManager
+        }
     }
 
     override fun setUpViews() {
@@ -77,37 +95,41 @@ class MoviesListFragment : Fragment(), MovieListTemplate {
             footer = MovieLoadStateAdapter { adapter.retry() }
         )
         adapter.addLoadStateListener { loadState ->
-            if (loadState.refresh !is LoadState.NotLoading) {
-                if (adapter.itemCount == 0) {
-                    binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
-                    binding.retryButton.isVisible = loadState.refresh is LoadState.Error
-                } else {
-                    binding.progressBar.visibility = View.GONE
-                    binding.retryButton.visibility = View.GONE
-                }
+            handleLoadState(loadState)
+        }
+    }
+
+    private fun handleLoadState(loadState: CombinedLoadStates) {
+        if (loadState.refresh !is LoadState.NotLoading) {
+            if (adapter.itemCount == 0) {
+                binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
+                binding.retryButton.isVisible = loadState.refresh is LoadState.Error
             } else {
-                binding.list.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.GONE
                 binding.retryButton.visibility = View.GONE
+            }
+        } else {
+            binding.list.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.GONE
+            binding.retryButton.visibility = View.GONE
 
-                val errorState = when {
-                    loadState.append is LoadState.Error -> {
-                        loadState.append as LoadState.Error
-                    }
-                    loadState.prepend is LoadState.Error -> {
-                        loadState.prepend as LoadState.Error
-                    }
-                    else -> {
-                        null
-                    }
+            val errorState = when {
+                loadState.append is LoadState.Error -> {
+                    loadState.append as LoadState.Error
                 }
-                errorState?.let {
-                    Toast.makeText(
-                        context,
-                        "\uD83D\uDE28 Wooops ${it.error}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                loadState.prepend is LoadState.Error -> {
+                    loadState.prepend as LoadState.Error
                 }
+                else -> {
+                    null
+                }
+            }
+            errorState?.let {
+                Toast.makeText(
+                    context,
+                    "\uD83D\uDE28 Wooops ${it.error}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }

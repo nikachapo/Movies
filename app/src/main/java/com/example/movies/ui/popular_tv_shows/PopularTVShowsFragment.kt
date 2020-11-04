@@ -6,26 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.movies.R
 import com.example.movies.ui.MainActivity
+import com.example.movies.ui.MovieListPresenterBaseFragment
 import com.example.movies.ui.movies_list.LayoutManager
-import com.example.movies.ui.movies_list.MoviesListFragment
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class PopularTVShowsFragment : Fragment() {
+class PopularTVShowsFragment : MovieListPresenterBaseFragment(LayoutManager.GRID) {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
     private lateinit var viewModel: PopularTVShowsViewModel
-    private var movieListFragment: MoviesListFragment? = null
     private var getPopularMoviesJob: Job? = null
-    private var currentManager: LayoutManager = LayoutManager.GRID
+
+    override val containerId: Int
+        get() = R.id.popularTVShowsListContainer
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -41,23 +41,18 @@ class PopularTVShowsFragment : Fragment() {
         val changeLayoutIV = view.findViewById<ImageView>(R.id.changeListShowTypeIV)
         changeLayoutIV.run {
             setBackgroundResource(getDrawableIdForIV(currentManager))
-            setOnClickListener {
-                currentManager = if (currentManager == LayoutManager.GRID) {
-                    LayoutManager.LINEAR
-                } else {
-                    LayoutManager.GRID
-                }
-                setBackgroundResource(getDrawableIdForIV(currentManager))
-                movieListFragment?.changeLayoutManager(currentManager)
-            }
+            setOnClickListener { changeLayoutManager() }
         }
         return view
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setUpFragmentList(savedInstanceState)
         viewModel = ViewModelProvider(this, factory).get(PopularTVShowsViewModel::class.java)
+    }
+
+    override fun onStart() {
+        super.onStart()
         getPopularMovies()
     }
 
@@ -67,26 +62,6 @@ class PopularTVShowsFragment : Fragment() {
             viewModel.getPopularMovies().collect { movies ->
                 movieListFragment?.submitData(movies)
             }
-        }
-    }
-
-    private fun setUpFragmentList(savedInstanceState: Bundle?) {
-        if (savedInstanceState == null) {
-            movieListFragment = MoviesListFragment.newInstance(LayoutManager.GRID)
-            childFragmentManager.beginTransaction()
-                .add(
-                    R.id.popularTVShowsListContainer, movieListFragment!!
-                ).commit()
-        } else {
-            movieListFragment =
-                childFragmentManager.findFragmentById(R.id.popularTVShowsListContainer) as MoviesListFragment?
-        }
-    }
-
-    private fun getDrawableIdForIV(layoutManager: LayoutManager): Int {
-        return when (layoutManager) {
-            LayoutManager.GRID -> R.drawable.ic_grid
-            LayoutManager.LINEAR -> R.drawable.ic_linear
         }
     }
 

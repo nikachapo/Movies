@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:elevation="0dp">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:contentScrim="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
+        app:titleEnabled="false"
+        app:toolbarId="@+id/activity_main_toolbar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/searchToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="@string/app_name">
+
+
+            <EditText
+                android:id="@+id/search_movie_et"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/search_height"
+                android:background="@drawable/search_bg"
+                android:hint="@string/app_name"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:visibility="gone"
+                android:paddingStart="@dimen/margit_to_main_edge"
+                android:paddingEnd="@dimen/margit_to_main_edge"
+                android:layout_marginEnd="@dimen/margit_to_main_edge"
+                android:textColor="@color/def_text_color"
+                tools:text="The Walking Dead" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageButton
+            android:id="@+id/searchBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/margit_to_main_edge"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_search_24" />
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+</com.google.android.material.appbar.AppBarLayout>
