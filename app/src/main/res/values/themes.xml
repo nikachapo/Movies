@@ -10,8 +10,19 @@
         <item name="colorSecondaryVariant">@color/color_secondary_variant</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
+        <item name="android:homeAsUpIndicator">@drawable/ic_back</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ImdbBtnStyle" parent="TextAppearance.AppCompat.Button">
+        <item name="android:drawableTop">@mipmap/ic_imdb</item>
+        <item name="android:textSize">@dimen/imdb_rate_text_size</item>
+        <item name="android:layout_marginTop">@dimen/imdb_rate_margin_to_edge</item>
+        <item name="android:layout_marginEnd">@dimen/imdb_rate_margin_to_edge</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/def_text_color</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

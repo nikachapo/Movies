@@ -1,6 +1,7 @@
 package com.example.movies.di
 
 import android.content.Context
+import com.example.movies.api.MoviesService
 import com.example.movies.di.view_model.ViewModelModule
 import com.example.movies.ui.MainActivity
 import com.example.movies.ui.popular_tv_shows.PopularTVShowsFragment
@@ -19,6 +20,8 @@ interface AppComponent {
     interface Factory {
         fun create(@BindsInstance context: Context): AppComponent
     }
+
+    fun moviesService(): MoviesService
 
     fun inject(mainActivity: MainActivity)
     fun inject(popularTVShowsFragment: PopularTVShowsFragment)

@@ -18,6 +18,9 @@ import com.example.movies.databinding.FragmentMoviesListBinding
 import com.example.movies.model.MovieModel
 import com.example.movies.paging.MovieLoadStateAdapter
 import com.example.movies.paging.MoviesAdapter
+import com.example.movies.ui.EXTRA_MOVIE_DATA
+import com.example.movies.ui.MovieDetailsActivity
+import com.example.movies.utils.moveToActivity
 import java.io.Serializable
 
 @Suppress("UNCHECKED_CAST")
@@ -28,9 +31,7 @@ class MoviesListFragment : Fragment(), MoviesListTemplate {
     private lateinit var currentOrientation: Orientation
     override lateinit var mView: View
     override val binding: FragmentMoviesListBinding by lazy { FragmentMoviesListBinding.bind(mView) }
-    private val adapter = MoviesAdapter().apply {
-        stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-    }
+    private lateinit var adapter: MoviesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +91,13 @@ class MoviesListFragment : Fragment(), MoviesListTemplate {
     }
 
     override fun initAdapter() {
+        adapter = MoviesAdapter {
+            activity?.moveToActivity(MovieDetailsActivity::class.java) {
+                putSerializable(EXTRA_MOVIE_DATA, it)
+            }
+        }.apply {
+            stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        }
         binding.list.adapter = adapter.withLoadStateHeaderAndFooter(
             header = MovieLoadStateAdapter { adapter.retry() },
             footer = MovieLoadStateAdapter { adapter.retry() }

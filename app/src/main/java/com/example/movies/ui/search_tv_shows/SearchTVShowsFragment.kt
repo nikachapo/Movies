@@ -68,7 +68,7 @@ class SearchTVShowsFragment : MovieListPresenterBaseFragment(LayoutManager.LINEA
     }
 
     private fun initSearch(query: String) {
-        searchEditText = (activity as MainActivity).findViewById<EditText>(R.id.search_movie_et)
+        searchEditText = (activity as MainActivity).findViewById(R.id.search_movie_et)
         searchEditText.setText(query)
         searchEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_GO) {

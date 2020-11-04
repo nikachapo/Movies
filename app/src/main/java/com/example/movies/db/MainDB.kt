@@ -6,9 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.movies.model.MovieModel
-import com.example.movies.model.RemoteKey
 
-@Database(entities = [MovieModel::class, RemoteKey::class], version = 3, exportSchema = false)
+@Database(entities = [MovieModel::class], version = 4, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class MainDB : RoomDatabase() {
 
@@ -20,8 +19,7 @@ abstract class MainDB : RoomDatabase() {
 
         fun getInstance(context: Context): MainDB =
             INSTANCE ?: synchronized(this) {
-                INSTANCE
-                    ?: buildDatabase(context).also { INSTANCE = it }
+                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
 
         private fun buildDatabase(context: Context) =

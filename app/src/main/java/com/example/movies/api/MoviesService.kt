@@ -19,6 +19,11 @@ interface MoviesService {
         @Query("api_key") key: String = "b96423827404b3c13297beb0e141ba86"
     ): MovieResponseModel
 
+    @GET("genre/tv/list")
+    suspend fun getGenresResponse(
+        @Query("api_key") key: String = "b96423827404b3c13297beb0e141ba86"
+    ): GenresResponseModel
+
     companion object {
         const val BASE_URL = "https://api.themoviedb.org/3/"
     }

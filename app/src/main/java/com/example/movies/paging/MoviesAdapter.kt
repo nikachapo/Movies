@@ -6,13 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.model.MovieModel
 
-class MoviesAdapter : PagingDataAdapter<MovieModel, RecyclerView.ViewHolder>(MOVIE_COMPARATOR) {
+class MoviesAdapter(
+    private val onItemClick: (MovieModel) -> Unit
+) : PagingDataAdapter<MovieModel, RecyclerView.ViewHolder>(MOVIE_COMPARATOR) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        return MovieViewHolder.create(parent)
+        return MovieViewHolder.create(parent, onItemClick)
     }
 
     override fun onBindViewHolder(

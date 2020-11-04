@@ -12,5 +12,6 @@
     <dimen name="text_view_padding">8dp</dimen>
     <dimen name="margit_to_main_edge">8dp</dimen>
     <dimen name="search_height">40dp</dimen>
+    <dimen name="margin_between_texts">8dp</dimen>
 
 </resources>

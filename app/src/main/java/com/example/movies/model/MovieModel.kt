@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Entity(tableName = "movies_table")
 @TypeConverters()
@@ -19,7 +20,7 @@ data class MovieModel(
     @SerializedName("original_language") val originalLanguage: String?,
     @SerializedName("vote_average") val voteAverage: Double?,
     @SerializedName("vote_count") val voteCount: Int?
-) {
+) : Serializable {
 
     @SerializedName("page")
     var page: Int = 0
@@ -29,6 +30,9 @@ data class MovieModel(
 
     val posterUrl: String
         get() = BASE_IMG_PATH + posterPath
+
+    val backgroundUrl: String
+        get() = BASE_IMG_PATH + backgroundPath
 }
 
 private const val BASE_IMG_PATH = "https://image.tmdb.org/t/p/w200"
