@@ -1,8 +1,7 @@
 package com.example.movies.paging.source.movies_response
 
-import com.example.movies.api.MovieResponseModel
+import com.example.movies.model.MovieResponseModel
 import com.example.movies.api.MoviesService
-import com.example.movies.paging.source.movies_response.MoviesResponseSource
 
 class SearchMovieResponseSource(
     private val moviesService: MoviesService,

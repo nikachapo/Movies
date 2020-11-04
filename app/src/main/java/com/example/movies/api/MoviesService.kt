@@ -1,5 +1,7 @@
 package com.example.movies.api
 
+import com.example.movies.model.GenresResponseModel
+import com.example.movies.model.MovieResponseModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import com.squareup.picasso.Picasso
 
-
 fun ImageView.loadImage(uri: Uri?) {
     Picasso.get()
         .load(uri)

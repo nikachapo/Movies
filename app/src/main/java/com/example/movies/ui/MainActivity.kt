@@ -1,7 +1,6 @@
 package com.example.movies.ui
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movies.App

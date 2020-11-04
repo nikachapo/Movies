@@ -66,7 +66,6 @@ class PopularTVShowsFragment : MovieListPresenterBaseFragment(LayoutManager.GRID
     }
 
     companion object {
-        fun newInstance() =
-            PopularTVShowsFragment()
+        fun newInstance() = PopularTVShowsFragment()
     }
 }

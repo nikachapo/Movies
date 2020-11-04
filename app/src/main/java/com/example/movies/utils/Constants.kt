@@ -1,6 +1,6 @@
 package com.example.movies.utils
 
-import com.example.movies.api.GenresResponseModel
+import com.example.movies.model.GenresResponseModel
 import com.google.gson.Gson
 
 private const val DEFAULT_GENRES_JSON_STRING =
