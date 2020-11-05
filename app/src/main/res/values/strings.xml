@@ -4,4 +4,5 @@
     <string name="search_hint">Movies</string>
     <string name="overview">Overview</string>
     <string name="genres">Genre</string>
+    <string name="movie_poster_transition">moviePosterTrans</string>
 </resources>

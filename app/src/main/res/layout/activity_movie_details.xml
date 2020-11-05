@@ -21,8 +21,8 @@
                 android:id="@+id/detailsBackground"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/ic_launcher"
+                android:scaleType="centerCrop" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:layout_marginBottom="64dp"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
-                android:transitionName="imageTransition"
+                android:transitionName="@string/movie_poster_transition"
                 app:layout_collapseMode="parallax"
                 tools:src="@mipmap/ic_launcher" />
 
@@ -122,9 +122,9 @@
 
             <FrameLayout
                 android:id="@+id/similarMoviesListContainer"
-                android:layout_marginTop="@dimen/margin_to_main_edge"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/horizontal_list_height" />
+                android:layout_height="@dimen/horizontal_list_height"
+                android:layout_marginTop="@dimen/margin_to_main_edge" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
