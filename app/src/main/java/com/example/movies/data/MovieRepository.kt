@@ -6,7 +6,9 @@ import androidx.paging.PagingData
 import com.example.movies.api.MoviesService
 import com.example.movies.db.MoviesDao
 import com.example.movies.model.MovieModel
+import com.example.movies.model.ReviewModel
 import com.example.movies.paging.source.MoviePagingSource
+import com.example.movies.paging.source.ReviewPagingSource
 import com.example.movies.paging.source.movies_response.SearchMovieResponseSource
 import com.example.movies.paging.source.movies_response.SimilarMoviesResponseSource
 import kotlinx.coroutines.flow.Flow
@@ -18,9 +20,11 @@ class MovieRepository @Inject constructor(
     private val moviesDao: MoviesDao
 ) {
 
+    private val config = PagingConfig(pageSize = PAGE_SIZE)
+
     fun getPopularMovies(): Flow<PagingData<MovieModel>> {
         return Pager(
-            config = PagingConfig(pageSize = PAGE_SIZE),
+            config = config,
             remoteMediator = remoteMediator,
             pagingSourceFactory = { moviesDao.getMovies() }
         ).flow
@@ -28,7 +32,7 @@ class MovieRepository @Inject constructor(
 
     fun searchMovies(query: String): Flow<PagingData<MovieModel>> {
         return Pager(
-            config = PagingConfig(pageSize = PAGE_SIZE),
+            config = config,
             pagingSourceFactory = {
                 MoviePagingSource(
                     SearchMovieResponseSource(moviesService, query)
@@ -39,11 +43,20 @@ class MovieRepository @Inject constructor(
 
     fun getSimilarMovies(movieId: String): Flow<PagingData<MovieModel>> {
         return Pager(
-            config = PagingConfig(pageSize = PAGE_SIZE),
+            config = config,
             pagingSourceFactory = {
                 MoviePagingSource(
                     SimilarMoviesResponseSource(moviesService, movieId)
                 )
+            }
+        ).flow
+    }
+
+    fun getReviews(movieId: String): Flow<PagingData<ReviewModel>> {
+        return Pager(
+            config = config,
+            pagingSourceFactory = {
+                ReviewPagingSource(moviesService, movieId)
             }
         ).flow
     }

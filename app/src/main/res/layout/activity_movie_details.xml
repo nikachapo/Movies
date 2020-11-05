@@ -50,7 +50,7 @@
                 android:layout_gravity="top"
                 android:gravity="center_vertical"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                android:theme="@style/ThemeOverlay.AppCompat.DayNight">
 
 
                 <TextView
@@ -70,9 +70,9 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp"
+        android:padding="@dimen/margin_to_main_edge"
+        android:layout_marginBottom="?attr/actionBarSize"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -128,5 +128,9 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/reviewsLayout"
+        layout="@layout/reviews_bottom_sheet_layout" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
 import com.example.movies.databinding.FragmentMoviesListBinding
 import com.example.movies.model.MovieModel
-import com.example.movies.paging.MovieLoadStateAdapter
-import com.example.movies.paging.MoviesAdapter
+import com.example.movies.paging.load_state.LoadStateAdapter
+import com.example.movies.paging.movies.MoviesAdapter
 import com.example.movies.ui.movie_details.EXTRA_MOVIE_DATA
 import com.example.movies.ui.movie_details.MovieDetailsActivity
 import com.example.movies.utils.moveToActivity
@@ -99,8 +99,8 @@ class MoviesListFragment : Fragment(), MoviesListTemplate {
             stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
         binding.list.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = MovieLoadStateAdapter { adapter.retry() },
-            footer = MovieLoadStateAdapter { adapter.retry() }
+            header = LoadStateAdapter { adapter.retry() },
+            footer = LoadStateAdapter { adapter.retry() }
         )
         adapter.addLoadStateListener { loadState ->
             handleLoadState(loadState)

@@ -1,4 +1,4 @@
-package com.example.movies.paging
+package com.example.movies.paging.movies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -35,7 +35,10 @@ class MovieViewHolder(
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie, parent, false)
             val binding = ItemMovieBinding.bind(view)
-            return MovieViewHolder(binding, onItemClick)
+            return MovieViewHolder(
+                binding,
+                onItemClick
+            )
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.movies.paging
+package com.example.movies.paging.movies
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -14,7 +14,10 @@ class MoviesAdapter(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        return MovieViewHolder.create(parent, onItemClick)
+        return MovieViewHolder.create(
+            parent,
+            onItemClick
+        )
     }
 
     override fun onBindViewHolder(

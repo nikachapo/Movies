@@ -1,4 +1,4 @@
-package com.example.movies.paging
+package com.example.movies.paging.load_state
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
 import com.example.movies.databinding.MoviesLoadStateFooterViewItemBinding
 
-class MoviesLoadStateViewHolder(
+class LoadStateViewHolder(
     private val binding: MoviesLoadStateFooterViewItemBinding,
     retry: () -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -27,11 +27,14 @@ class MoviesLoadStateViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup, retry: () -> Unit): MoviesLoadStateViewHolder {
+        fun create(parent: ViewGroup, retry: () -> Unit): LoadStateViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.movies_load_state_footer_view_item, parent, false)
             val binding = MoviesLoadStateFooterViewItemBinding.bind(view)
-            return MoviesLoadStateViewHolder(binding, retry)
+            return LoadStateViewHolder(
+                binding,
+                retry
+            )
         }
     }
 }
