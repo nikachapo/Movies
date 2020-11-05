@@ -14,15 +14,15 @@ import com.example.movies.paging.source.movies_response.SimilarMoviesResponseSou
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class MovieRepository @Inject constructor(
+class MovieRepositoryImpl @Inject constructor(
     private val moviesService: MoviesService,
     private val remoteMediator: MoviesRemoteMediator,
     private val moviesDao: MoviesDao
-) {
+) : IMovieRepository {
 
     private val config = PagingConfig(pageSize = PAGE_SIZE)
 
-    fun getPopularMovies(): Flow<PagingData<MovieModel>> {
+    override fun getPopularMovies(): Flow<PagingData<MovieModel>> {
         return Pager(
             config = config,
             remoteMediator = remoteMediator,
@@ -30,7 +30,7 @@ class MovieRepository @Inject constructor(
         ).flow
     }
 
-    fun searchMovies(query: String): Flow<PagingData<MovieModel>> {
+    override fun searchMovies(query: String): Flow<PagingData<MovieModel>> {
         return Pager(
             config = config,
             pagingSourceFactory = {
@@ -41,7 +41,7 @@ class MovieRepository @Inject constructor(
         ).flow
     }
 
-    fun getSimilarMovies(movieId: String): Flow<PagingData<MovieModel>> {
+    override fun getSimilarMovies(movieId: String): Flow<PagingData<MovieModel>> {
         return Pager(
             config = config,
             pagingSourceFactory = {
@@ -52,7 +52,7 @@ class MovieRepository @Inject constructor(
         ).flow
     }
 
-    fun getReviews(movieId: String): Flow<PagingData<ReviewModel>> {
+    override fun getReviews(movieId: String): Flow<PagingData<ReviewModel>> {
         return Pager(
             config = config,
             pagingSourceFactory = {

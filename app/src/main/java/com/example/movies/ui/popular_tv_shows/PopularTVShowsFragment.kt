@@ -24,8 +24,9 @@ class PopularTVShowsFragment : MovieListPresenterBaseFragment(LayoutManager.GRID
     private lateinit var viewModel: PopularTVShowsViewModel
     private var getPopularMoviesJob: Job? = null
 
-    override val containerId: Int
-        get() = R.id.popularTVShowsListContainer
+    override val containerId = R.id.popularTVShowsListContainer
+
+    override fun showData() = getPopularMovies()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,11 +50,6 @@ class PopularTVShowsFragment : MovieListPresenterBaseFragment(LayoutManager.GRID
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this, factory).get(PopularTVShowsViewModel::class.java)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        getPopularMovies()
     }
 
     private fun getPopularMovies() {

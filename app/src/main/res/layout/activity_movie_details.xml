@@ -22,21 +22,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@mipmap/ic_launcher"
+                android:contentDescription="@null"
                 android:scaleType="centerCrop" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/details_bg_top_layer" />
+                android:background="@drawable/details_bg_top_layer"
+                android:contentDescription="@null" />
 
             <ImageView
                 android:id="@+id/detailsMovieImage"
-                android:layout_width="150dp"
-                android:layout_height="200dp"
+                android:layout_width="@dimen/details_poster_width"
+                android:layout_height="@dimen/details_poster_height"
                 android:layout_gravity="start"
                 android:layout_marginStart="@dimen/imdb_rate_margin_to_edge"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="64dp"
+                android:layout_marginTop="@dimen/details_poster_margin_top"
+                android:layout_marginBottom="@dimen/details_poster_margin_bottom"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
                 android:transitionName="@string/movie_poster_transition"
@@ -49,8 +51,8 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="top"
                 android:gravity="center_vertical"
-                app:layout_collapseMode="pin"
-                android:theme="@style/ThemeOverlay.AppCompat.DayNight">
+                android:theme="@style/ThemeOverlay.AppCompat.DayNight"
+                app:layout_collapseMode="pin">
 
 
                 <TextView
@@ -70,8 +72,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/margin_to_main_edge"
         android:layout_marginBottom="?attr/actionBarSize"
+        android:padding="@dimen/margin_to_main_edge"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout

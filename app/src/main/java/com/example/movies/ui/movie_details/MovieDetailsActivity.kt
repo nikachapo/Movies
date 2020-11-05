@@ -36,38 +36,52 @@ class MovieDetailsActivity : AppCompatActivity() {
     @Inject
     lateinit var genresMap: MutableMap<Long, String>
 
+    private lateinit var movie: MovieModel
+
     private lateinit var viewModel: MovieDetailsViewModel
 
     private lateinit var binding: ActivityMovieDetailsBinding
+
     private val adapter by lazy {
         ReviewsAdapter().apply {
             stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
     }
+
     private var moviesListFragment: MoviesListFragment? = null
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     private var similarMoviesJob: Job? = null
-    private var reviewsJob: Job? = null
 
-    private lateinit var movie: MovieModel
+    private var reviewsJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val app = application as App
+
         app.appComponent.inject(this)
 
         super.onCreate(savedInstanceState)
+
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+
         viewModel = ViewModelProvider(this, factory).get(MovieDetailsViewModel::class.java)
+
         movie = intent.getSerializableExtra(EXTRA_MOVIE_DATA) as MovieModel
+
         setUpToolbar(movie.name ?: getString(R.string.app_name))
+
         showMovieData(movie)
+
         initMovieListFragment(savedInstanceState)
+
         initBottomSheet()
+
         initReviewList()
+
         getReviews()
     }
 
@@ -79,23 +93,29 @@ class MovieDetailsActivity : AppCompatActivity() {
     }
 
     private fun initBottomSheet() {
-        bottomSheetBehavior =
-            BottomSheetBehavior.from(binding.reviewsLayout.bottomSheerRootView)
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.reviewsLayout.bottomSheerRootView)
+
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
+
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+
             override fun onStateChanged(bottomSheet: View, newState: Int) {
+
                 binding.reviewsLayout.arrowToggle.isChecked =
                     newState == BottomSheetBehavior.STATE_EXPANDED
-            }
 
+            }
         })
+
         binding.reviewsLayout.arrowToggle.setOnCheckedChangeListener { _, isChecked ->
+
             if (isChecked) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             } else {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
+
         }
     }
 
@@ -148,6 +168,7 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun showMovieData(movieModel: MovieModel) {
+
         binding.detailsBackground.loadImage(movieModel.backgroundUrl)
         binding.detailsMovieImage.loadImage(movieModel.posterUrl)
         binding.detailsOverviewTV.text = movieModel.overview
@@ -155,18 +176,23 @@ class MovieDetailsActivity : AppCompatActivity() {
         binding.detailsRatingTV.text = "${movieModel.voteAverage}/${movieModel.voteCount}"
 
         movieModel.genreIds?.run {
-            for (genre in this) {
+
+        for (genre in this) {
                 binding.detailsGenresTV.append("${genresMap[genre]}, ")
             }
+
         }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         if (item.itemId == android.R.id.home) {
             onBackPressed()
             return true
         }
         return false
+
     }
 
 }

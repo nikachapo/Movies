@@ -1,9 +1,11 @@
 package com.example.movies.model
 
+import com.google.gson.annotations.SerializedName
+
 data class ReviewResponseModel(
-    val id: Int,
-    val page: Int,
-    val results: List<ReviewModel>,
-    val total_pages: Int,
-    val total_results: Int
+    @SerializedName("id") val id: Int,
+    @SerializedName("page") val page: Int,
+    @SerializedName("results") val results: List<ReviewModel>,
+    @SerializedName("total_pages") val total_pages: Int,
+    @SerializedName("total_results") val total_results: Int
 )

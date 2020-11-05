@@ -32,6 +32,10 @@ class SearchTVShowsFragment : MovieListPresenterBaseFragment(LayoutManager.LINEA
     override val containerId: Int
         get() = R.id.searchTVShowsListContainer
 
+    override fun showData() {
+        search(lastSearchQuery)
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity as MainActivity).appComponent.inject(this)
@@ -50,11 +54,6 @@ class SearchTVShowsFragment : MovieListPresenterBaseFragment(LayoutManager.LINEA
         savedInstanceState?.getString(LAST_SEARCH_QUERY)?.also {
             lastSearchQuery = it
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        search(lastSearchQuery)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,6 +94,7 @@ class SearchTVShowsFragment : MovieListPresenterBaseFragment(LayoutManager.LINEA
 
         searchJob = lifecycleScope.launch {
             viewModel.searchMovie(query).collect {
+                movieListFragment?.scrollToTop()
                 movieListFragment?.submitData(it)
             }
         }

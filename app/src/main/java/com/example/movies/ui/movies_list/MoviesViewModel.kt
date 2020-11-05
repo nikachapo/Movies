@@ -14,9 +14,11 @@ abstract class MoviesViewModel : ViewModel() {
     protected fun setCurrentResult(
         movies: Flow<PagingData<MovieModel>>
     ): Flow<PagingData<MovieModel>> {
+
         val newResult: Flow<PagingData<MovieModel>> = movies
             .cachedIn(viewModelScope)
         currentResult = newResult
         return newResult
+
     }
 }

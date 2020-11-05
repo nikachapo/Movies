@@ -12,9 +12,16 @@ abstract class MovieListPresenterBaseFragment(layoutManager: LayoutManager) : Fr
 
     abstract val containerId: Int
 
+    abstract fun showData()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpFragmentList(savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        showData()
     }
 
     private fun setUpFragmentList(savedInstanceState: Bundle?) {

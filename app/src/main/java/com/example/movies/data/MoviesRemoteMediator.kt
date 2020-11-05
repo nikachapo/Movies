@@ -13,8 +13,6 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-private const val START_PAGE_INDEX = 1
-
 @OptIn(ExperimentalPagingApi::class)
 class MoviesRemoteMediator @Inject constructor(
     private val mainDB: MainDB,
@@ -53,5 +51,9 @@ class MoviesRemoteMediator @Inject constructor(
         } catch (e: HttpException) {
             MediatorResult.Error(e)
         }
+    }
+
+    companion object {
+        private const val START_PAGE_INDEX = 1
     }
 }

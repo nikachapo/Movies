@@ -29,6 +29,7 @@ class MoviesListFragment : Fragment(), MoviesListTemplate {
     private lateinit var listLayoutManager: RecyclerView.LayoutManager
     private lateinit var currentLayoutManager: LayoutManager
     private lateinit var currentOrientation: Orientation
+
     override lateinit var mView: View
     override val binding: FragmentMoviesListBinding by lazy { FragmentMoviesListBinding.bind(mView) }
     private lateinit var adapter: MoviesAdapter

@@ -2,7 +2,6 @@ package com.example.movies.di.view_model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.movies.ui.MainViewModel
 import com.example.movies.ui.movie_details.MovieDetailsViewModel
 import com.example.movies.ui.popular_tv_shows.PopularTVShowsViewModel
 import com.example.movies.ui.search_tv_shows.SearchTVShowsViewModel

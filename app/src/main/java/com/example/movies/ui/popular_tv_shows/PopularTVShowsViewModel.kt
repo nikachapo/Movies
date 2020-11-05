@@ -1,13 +1,13 @@
 package com.example.movies.ui.popular_tv_shows
 
 import androidx.paging.PagingData
-import com.example.movies.data.MovieRepository
+import com.example.movies.data.IMovieRepository
 import com.example.movies.model.MovieModel
 import com.example.movies.ui.movies_list.MoviesViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class PopularTVShowsViewModel @Inject constructor(private val movieRepository: MovieRepository) :
+class PopularTVShowsViewModel @Inject constructor(private val movieRepository: IMovieRepository) :
     MoviesViewModel() {
 
     fun getPopularMovies(refreshData: Boolean = false): Flow<PagingData<MovieModel>> {

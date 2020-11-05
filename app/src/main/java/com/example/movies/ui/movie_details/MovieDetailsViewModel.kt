@@ -3,14 +3,14 @@ package com.example.movies.ui.movie_details
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.movies.data.MovieRepository
+import com.example.movies.data.IMovieRepository
 import com.example.movies.model.MovieModel
 import com.example.movies.model.ReviewModel
 import com.example.movies.ui.movies_list.MoviesViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class MovieDetailsViewModel @Inject constructor(private val moviesRepository: MovieRepository) :
+class MovieDetailsViewModel @Inject constructor(private val moviesRepository: IMovieRepository) :
     MoviesViewModel() {
 
     private var currentMovieId: String? = null

@@ -1,8 +1,13 @@
 package com.example.movies.di
 
 import android.content.Context
+import com.example.movies.api.MoviesService
+import com.example.movies.data.IMovieRepository
+import com.example.movies.data.MovieRepositoryImpl
+import com.example.movies.data.MoviesRemoteMediator
 import com.example.movies.db.MainDB
 import com.example.movies.db.MoviesDao
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
@@ -19,4 +24,12 @@ class AppModule {
         return mainDb.moviesDao
     }
 
+    @Provides
+    fun provideMovieRepo(
+        moviesService: MoviesService,
+        remoteMediator: MoviesRemoteMediator,
+        moviesDao: MoviesDao
+    ): IMovieRepository {
+        return MovieRepositoryImpl(moviesService, remoteMediator, moviesDao)
+    }
 }

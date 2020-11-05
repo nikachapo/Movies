@@ -23,10 +23,7 @@ abstract class MainDB : RoomDatabase() {
             }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(
-                context.applicationContext,
-                MainDB::class.java, "main.db"
-            )
+            Room.databaseBuilder(context.applicationContext, MainDB::class.java, "main.db")
                 .build()
     }
 }
