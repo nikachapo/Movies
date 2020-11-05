@@ -32,9 +32,9 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:visibility="gone"
-                android:paddingStart="@dimen/margit_to_main_edge"
-                android:paddingEnd="@dimen/margit_to_main_edge"
-                android:layout_marginEnd="@dimen/margit_to_main_edge"
+                android:paddingStart="@dimen/margin_to_main_edge"
+                android:paddingEnd="@dimen/margin_to_main_edge"
+                android:layout_marginEnd="@dimen/margin_to_main_edge"
                 android:textColor="@color/def_text_color"
                 tools:text="The Walking Dead" />
 
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="@dimen/margit_to_main_edge"
+            android:layout_marginEnd="@dimen/margin_to_main_edge"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_search_24" />
     </com.google.android.material.appbar.CollapsingToolbarLayout>

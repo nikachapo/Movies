@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.movies.R
 import com.example.movies.ui.MainActivity
-import com.example.movies.ui.MovieListPresenterBaseFragment
+import com.example.movies.ui.movies_list.MovieListPresenterBaseFragment
 import com.example.movies.ui.movies_list.LayoutManager
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect

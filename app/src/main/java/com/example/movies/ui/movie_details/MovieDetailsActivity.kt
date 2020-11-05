@@ -1,34 +1,82 @@
-package com.example.movies.ui
+package com.example.movies.ui.movie_details
 
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.movies.App
 import com.example.movies.R
 import com.example.movies.databinding.ActivityMovieDetailsBinding
 import com.example.movies.model.MovieModel
+import com.example.movies.ui.movies_list.LayoutManager
+import com.example.movies.ui.movies_list.MoviesListFragment
+import com.example.movies.ui.movies_list.Orientation
 import com.example.movies.utils.loadImage
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 const val EXTRA_MOVIE_DATA = "movie-data"
 
 class MovieDetailsActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+    private lateinit var viewModel: MovieDetailsViewModel
     private lateinit var binding: ActivityMovieDetailsBinding
     private var genresMap: MutableMap<Long, String>? = null
+    private var moviesListFragment: MoviesListFragment? = null
+
+    private var similarMoviesJob: Job? = null
+
+    private lateinit var movie: MovieModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val app = application as App
+        app.appComponent.inject(this)
+        genresMap = app.genresMap
+
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        genresMap = (application as App).genresMap
+        initMovieListFragment(savedInstanceState)
 
-        val movie = intent.getSerializableExtra(EXTRA_MOVIE_DATA) as MovieModel
+        movie = intent.getSerializableExtra(EXTRA_MOVIE_DATA) as MovieModel
         setUpToolbar(movie.name ?: getString(R.string.app_name))
-
+        viewModel = ViewModelProvider(this, factory).get(MovieDetailsViewModel::class.java)
         showMovieData(movie)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        getSimilarMovies()
+    }
+
+    private fun getSimilarMovies() {
+        similarMoviesJob?.cancel()
+        similarMoviesJob = lifecycleScope.launch {
+            viewModel.getSimilarMovies(movie.id.toString()).collect { movies ->
+                moviesListFragment?.submitData(movies)
+            }
+        }
+    }
+
+    private fun initMovieListFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            moviesListFragment =
+                MoviesListFragment.newInstance(LayoutManager.LINEAR, Orientation.HORIZONTAL)
+            supportFragmentManager.beginTransaction()
+                .add(R.id.similarMoviesListContainer, moviesListFragment!!).commit()
+        } else {
+            moviesListFragment =
+                supportFragmentManager.findFragmentById(R.id.similarMoviesListContainer) as MoviesListFragment?
+        }
     }
 
     private fun setUpToolbar(title: String) {

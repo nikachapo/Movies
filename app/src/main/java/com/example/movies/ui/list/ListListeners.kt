@@ -1,4 +1,7 @@
-package com.example.movies.ui.movies_list
+package com.example.movies.ui.list
+
+import com.example.movies.ui.movies_list.LayoutManager
+import com.example.movies.ui.movies_list.Orientation
 
 interface ListListeners {
 

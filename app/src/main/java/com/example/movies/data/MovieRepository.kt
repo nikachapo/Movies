@@ -8,6 +8,7 @@ import com.example.movies.db.MoviesDao
 import com.example.movies.model.MovieModel
 import com.example.movies.paging.source.MoviePagingSource
 import com.example.movies.paging.source.movies_response.SearchMovieResponseSource
+import com.example.movies.paging.source.movies_response.SimilarMoviesResponseSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -31,6 +32,17 @@ class MovieRepository @Inject constructor(
             pagingSourceFactory = {
                 MoviePagingSource(
                     SearchMovieResponseSource(moviesService, query)
+                )
+            }
+        ).flow
+    }
+
+    fun getSimilarMovies(movieId: String): Flow<PagingData<MovieModel>> {
+        return Pager(
+            config = PagingConfig(pageSize = PAGE_SIZE),
+            pagingSourceFactory = {
+                MoviePagingSource(
+                    SimilarMoviesResponseSource(moviesService, movieId)
                 )
             }
         ).flow

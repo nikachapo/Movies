@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg"
-    tools:context=".ui.MovieDetailsActivity">
+    tools:context=".ui.movie_details.MovieDetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -118,6 +118,13 @@
                 android:textColor="@color/def_text_color"
                 android:textSize="@dimen/def_text_size"
                 tools:text="20 aug 2004" />
+
+
+            <FrameLayout
+                android:id="@+id/similarMoviesListContainer"
+                android:layout_marginTop="@dimen/margin_to_main_edge"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/horizontal_list_height" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

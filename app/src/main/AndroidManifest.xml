@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Movies">
         <activity
-            android:name=".ui.MovieDetailsActivity"
+            android:name=".ui.movie_details.MovieDetailsActivity"
             android:parentActivityName=".ui.MainActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.MainActivity">

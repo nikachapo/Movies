@@ -16,8 +16,8 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="end"
-        android:layout_marginTop="@dimen/margit_to_main_edge"
-        android:layout_marginEnd="@dimen/margit_to_main_edge"
+        android:layout_marginTop="@dimen/margin_to_main_edge"
+        android:layout_marginEnd="@dimen/margin_to_main_edge"
         tools:src="@drawable/ic_linear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

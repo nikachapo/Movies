@@ -1,11 +1,9 @@
-package com.example.movies.ui
+package com.example.movies.ui.movies_list
 
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.movies.R
-import com.example.movies.ui.movies_list.LayoutManager
-import com.example.movies.ui.movies_list.MoviesListFragment
 
 abstract class MovieListPresenterBaseFragment(layoutManager: LayoutManager) : Fragment() {
 
@@ -39,7 +37,6 @@ abstract class MovieListPresenterBaseFragment(layoutManager: LayoutManager) : Fr
         setBackgroundResource(getDrawableIdForIV(currentManager))
         movieListFragment?.changeLayoutManager(currentManager)
     }
-
 
     protected fun getDrawableIdForIV(layoutManager: LayoutManager): Int {
         return when (layoutManager) {

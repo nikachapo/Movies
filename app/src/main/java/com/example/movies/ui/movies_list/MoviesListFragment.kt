@@ -18,8 +18,8 @@ import com.example.movies.databinding.FragmentMoviesListBinding
 import com.example.movies.model.MovieModel
 import com.example.movies.paging.MovieLoadStateAdapter
 import com.example.movies.paging.MoviesAdapter
-import com.example.movies.ui.EXTRA_MOVIE_DATA
-import com.example.movies.ui.MovieDetailsActivity
+import com.example.movies.ui.movie_details.EXTRA_MOVIE_DATA
+import com.example.movies.ui.movie_details.MovieDetailsActivity
 import com.example.movies.utils.moveToActivity
 import java.io.Serializable
 
