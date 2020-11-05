@@ -22,8 +22,6 @@ class MovieViewHolder(
 
     private fun showMovieData(movie: MovieModel) {
         this.movie = movie
-        binding.itemCardView.rotationY =
-            if (bindingAdapterPosition % 2 == 0) (-6).toFloat() else 6.toFloat()
         binding.itemNameTV.text = movie.name
         binding.itemPosterIV.loadImage(movie.posterUrl)
         binding.itemRatingTv.text = movie.voteAverage.toString()

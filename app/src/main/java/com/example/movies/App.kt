@@ -16,7 +16,7 @@ class App : Application() {
     var genresMap = mutableMapOf<Long, String>()
 
     val appComponent: AppComponent by lazy {
-        DaggerAppComponent.factory().create(applicationContext)
+        DaggerAppComponent.factory().create(applicationContext, genresMap)
     }
 
     override fun onCreate() {

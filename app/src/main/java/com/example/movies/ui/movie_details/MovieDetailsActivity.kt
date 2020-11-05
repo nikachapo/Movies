@@ -26,9 +26,12 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var genresMap: MutableMap<Long, String>
+
     private lateinit var viewModel: MovieDetailsViewModel
     private lateinit var binding: ActivityMovieDetailsBinding
-    private var genresMap: MutableMap<Long, String>? = null
     private var moviesListFragment: MoviesListFragment? = null
 
     private var similarMoviesJob: Job? = null
@@ -39,7 +42,6 @@ class MovieDetailsActivity : AppCompatActivity() {
 
         val app = application as App
         app.appComponent.inject(this)
-        genresMap = app.genresMap
 
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
