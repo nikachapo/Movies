@@ -10,20 +10,14 @@ class MoviesAdapter(
     private val onItemClick: (MovieModel) -> Unit
 ) : PagingDataAdapter<MovieModel, RecyclerView.ViewHolder>(MOVIE_COMPARATOR) {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MovieViewHolder.create(
             parent,
             onItemClick
         )
     }
 
-    override fun onBindViewHolder(
-        holder: RecyclerView.ViewHolder,
-        position: Int
-    ) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val movieItem = getItem(position)
         if (movieItem != null) {
             (holder as MovieViewHolder).bind(movieItem)
