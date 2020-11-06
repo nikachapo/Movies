@@ -1,6 +1,5 @@
 package com.example.movies.paging.source.movies_response
 
-import android.util.Log
 import com.example.movies.api.MoviesService
 import com.example.movies.model.MovieResponseModel
 
@@ -10,9 +9,7 @@ class SimilarMoviesResponseSource(
 ) : MoviesResponseSource {
 
     override suspend fun getResponse(page: Int): MovieResponseModel {
-        return moviesService.getSimilarTvShows(movieId, page).also {
-            Log.i("taaaaaaaag", "getResponse: ${it.movies}")
-        }
+        return moviesService.getSimilarTvShows(movieId, page)
     }
 
 }
