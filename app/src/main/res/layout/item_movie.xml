@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/movie_item_margin"
-    app:cardBackgroundColor="@android:color/transparent"
+    app:cardBackgroundColor="?colorOnBackground"
     app:cardCornerRadius="@dimen/card_radius">
 
     <FrameLayout
@@ -17,7 +17,7 @@
             android:id="@+id/itemPosterIV"
             android:layout_width="match_parent"
             android:layout_height="@dimen/movie_item_image_height"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             tools:src="@mipmap/ic_launcher"
             android:transitionName="@string/movie_poster_transition" />
 
@@ -43,9 +43,9 @@
             android:ellipsize="end"
             android:gravity="center_horizontal"
             android:maxLines="2"
+            style="@style/TextAppearance.MaterialComponents.Headline4"
             android:paddingStart="@dimen/text_view_padding"
             android:paddingEnd="@dimen/text_view_padding"
-            android:textColor="@color/def_text_color"
             android:textSize="@dimen/movie_item_name_text_size"
             tools:text="Name" />
     </FrameLayout>

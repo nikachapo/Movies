@@ -19,7 +19,6 @@
         android:layout_marginBottom="@dimen/margin_to_edge"
         android:gravity="center_horizontal"
         android:text="@string/choose_profile_image"
-        android:textColor="@color/def_text_color"
         android:textSize="@dimen/button_txt_size" />
 
 </FrameLayout>

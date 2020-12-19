@@ -158,11 +158,6 @@ class MovieDetailsActivity : AppCompatActivity() {
     private fun setUpToolbar(title: String) {
         setSupportActionBar(binding.detailsToolbar)
         binding.detailsCollapsingLayout.title = title
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val textColor = getColor(R.color.def_text_color)
-            binding.detailsToolbar.setTitleTextColor(textColor)
-            binding.detailsCollapsingLayout.setExpandedTitleColor(textColor)
-        }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

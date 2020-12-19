@@ -1,11 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="color_primary">#FF6200EE</color>
-    <color name="color_primary_variant">#C232FF</color>
-    <color name="color_secondary">#FF03DAC5</color>
-    <color name="color_secondary_variant">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="color_on_primary">#FFFFFFFF</color>
-    <color name="def_text_color">#5A5A5A</color>
+  <color name="purple_200">#FFB195</color> <!--Color primary (dark)-->
+  <color name="purple_500">#8C3013</color> <!--Color primary (light)-->
+  <color name="purple_600">#5D1802</color> <!--Color primary variant (dark)-->
+  <color name="purple_700">#401001</color> <!--Color primary variant (light)-->
+
+  <color name="green_200">#FFE500</color> <!--Color secondary-->
+  <color name="green_500">#CDA325</color> <!--Color secondary variant-->
+
+  <color name="red_200">#cf6679</color> <!--Color error (dark)-->
+  <color name="red_600">#b00020</color> <!--Color error (light)-->
+
+  <!--Color surface (light), color on error (light), -->
+  <!--color on surface (dark), color on surface (dark)-->
+  <color name="white_50">#ffffff</color>
+
+  <color name="black_800">#121212</color> <!--Color surface (dark)-->
+  <!--Color on secondary (light), color on background (light),-->
+  <!--color on surface (light)-->
+  <color name="black_900">#000000</color>
 </resources>

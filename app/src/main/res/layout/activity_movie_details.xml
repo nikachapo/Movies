@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg"
     tools:context=".ui.movie_details.MovieDetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -14,7 +13,7 @@
             android:id="@+id/detailsCollapsingLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="@color/color_primary_variant"
+            app:contentScrim="?colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView
@@ -51,7 +50,6 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="top"
                 android:gravity="center_vertical"
-                android:theme="@style/ThemeOverlay.AppCompat.DayNight"
                 app:layout_collapseMode="pin">
 
 
@@ -86,38 +84,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_between_texts"
-                android:text="@string/overview"
-                android:textColor="@color/def_text_color" />
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:text="@string/overview" />
 
             <TextView
                 android:id="@+id/detailsOverviewTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/def_text_color"
                 android:textSize="@dimen/def_text_size"
+                style="@style/TextAppearance.MaterialComponents.Body2"
                 tools:text="aopscmancapncpowncowncpopaomc" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_marginTop="@dimen/margin_between_texts"
-                android:text="@string/genres"
-                android:textColor="@color/def_text_color" />
+                android:text="@string/genres" />
 
             <TextView
                 android:id="@+id/detailsGenresTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/def_text_color"
                 android:textSize="@dimen/def_text_size"
+                style="@style/TextAppearance.MaterialComponents.Body2"
                 tools:text="kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk" />
 
             <TextView
                 android:id="@+id/detailsDateTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_marginTop="@dimen/margin_between_texts"
-                android:textColor="@color/def_text_color"
                 android:textSize="@dimen/def_text_size"
                 tools:text="20 aug 2004" />
 

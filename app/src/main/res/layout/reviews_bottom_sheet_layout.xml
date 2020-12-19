@@ -13,7 +13,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/color_secondary"
+        android:background="?attr/colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/reviews"
-            android:textColor="@android:color/white"
+            style="@style/TextAppearance.MaterialComponents.Headline1"
             android:textSize="24sp"
             android:textStyle="bold" />
     </FrameLayout>

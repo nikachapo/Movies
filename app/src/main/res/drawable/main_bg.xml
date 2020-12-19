@@ -7,12 +7,10 @@
     <gradient
         android:angle="45"
         android:centerX="35%"
-        android:centerColor="@color/color_primary"
+        android:centerColor="?attr/colorPrimary"
         android:startColor="#5414DD"
         android:endColor="#C5B859"
-        android:type="linear"
-
-        />
+        android:type="linear" />
 
 
 </shape>

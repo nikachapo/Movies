@@ -35,7 +35,6 @@
                 android:paddingStart="@dimen/margin_to_main_edge"
                 android:paddingEnd="@dimen/margin_to_main_edge"
                 android:layout_marginEnd="@dimen/margin_to_main_edge"
-                android:textColor="@color/def_text_color"
                 tools:text="The Walking Dead" />
 
         </androidx.appcompat.widget.Toolbar>
