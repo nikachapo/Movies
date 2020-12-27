@@ -43,6 +43,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -53,15 +57,20 @@ dependencies {
     implementation deps.material
     implementation deps.androidx.constraintlayout
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //testing
     testImplementation deps.tests.junit
     androidTestImplementation deps.tests.junitAndroidx
     androidTestImplementation deps.tests.espresso
+    testImplementation deps.tests.mockito
+    testImplementation deps.androidx.archtesting
 
-    implementation deps.retrofit.core
-    implementation deps.retrofit.gsonConverter
 //    implementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
 
     implementation deps.dagger.core
+
+    implementation deps.retrofit.core
+    implementation deps.retrofit.gsonConverter
     kapt deps.dagger.compiler
 
     implementation deps.coroutines.core
