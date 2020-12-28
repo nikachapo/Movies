@@ -70,11 +70,11 @@ class AccountManager @Inject constructor(
 
     suspend fun logOut(context: Context): Boolean = withContext(ioDispatcher) {
         try {
+            localStorage.setObjectAtLocation(KEY_ACCOUNT_ID, "")
             authUI.signOut(context)
                 .addOnSuccessListener {
                     _currentAccount.postValue(null)
                 }.await()
-            localStorage.setObjectAtLocation(KEY_ACCOUNT_ID, "")
             true
         } catch (e: Exception) {
             false
