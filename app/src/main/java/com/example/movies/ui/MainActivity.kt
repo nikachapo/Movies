@@ -2,16 +2,20 @@ package com.example.movies.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movies.App
 import com.example.movies.R
+import com.example.movies.account.AccountManager
 import com.example.movies.databinding.ActivityMainBinding
 import com.example.movies.di.AppComponent
 import com.example.movies.ui.popular_tv_shows.PopularTVShowsFragment
 import com.example.movies.ui.search_tv_shows.SearchTVShowsFragment
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    @Inject lateinit var accountManager: AccountManager
     private lateinit var binding: ActivityMainBinding
     lateinit var appComponent: AppComponent
     private var searching = false
@@ -24,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Toast.makeText(this,accountManager.currentAccount.toString(), Toast.LENGTH_SHORT).show()
         setSupportActionBar(binding.toolbarLayout.searchToolbar)
 
         if (savedInstanceState == null) {

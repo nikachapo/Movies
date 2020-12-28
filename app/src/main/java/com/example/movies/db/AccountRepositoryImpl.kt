@@ -1,6 +1,7 @@
 package com.example.movies.db
 
 import com.example.movies.account.Account
+import io.reactivex.Completable
 import javax.inject.Inject
 import javax.inject.Singleton
 import com.example.movies.network.AccountRemoteService as Remote
@@ -24,6 +25,10 @@ class AccountRepositoryImpl @Inject constructor(
     override suspend fun register(account: Account): Boolean {
         accountDao.insertAccount(account)
         return remote.registerAccount(account)
+    }
+
+    override fun deleteAccount(account: Account): Completable {
+        return accountDao.deleteAccount(account)
     }
 
 }
