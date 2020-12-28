@@ -8,7 +8,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
+        classpath 'com.google.gms:google-services:4.3.4'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -18,6 +18,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://oss.jfrog.org/libs-snapshot" }
     }
 }
 
@@ -44,9 +45,14 @@ ext.versions = [
         "junit"           : "4.13.1",
         "junitAndroidx"   : "1.1.2",
         "espresso"        : "3.3.0",
+        "mockito"         : "3.3.1",
         //////////////////////////////
         "picasso"         : "2.71828",
-        "room" : "2.3.0-alpha02"
+        "room" : "2.3.0-alpha02",
+        ///////////Firebase//////////
+        "realtime" : "19.5.0",
+        "auth" : "19.4.0",
+        "authUi" : "4.3.1"
 ]
 
 ext.deps = [
@@ -80,12 +86,18 @@ ext.deps = [
                 "junit"        : "junit:junit:${versions.junit}",
                 "junitAndroidx": "androidx.test.ext:junit:${versions.junitAndroidx}",
                 "truth"        : "com.google.truth:truth:${versions.truth}",
-                "espresso"     : "androidx.test.espresso:espresso-core:${versions.espresso}"
+                "espresso"     : "androidx.test.espresso:espresso-core:${versions.espresso}",
+                "mockito"      : "org.mockito:mockito-core:${versions.mockito}"
         ],
         "room" : [
                 "runtime" : "androidx.room:room-runtime:${versions.room}",
                 "core" : "androidx.room:room-ktx:${versions.room}",
                 "compiler" : "androidx.room:room-compiler:${versions.room}"
+        ],
+        "firebase" : [
+                "realtime" : "com.google.firebase:firebase-database:${versions.realtime}",
+                "auth" : "com.google.firebase:firebase-auth:${versions.auth}",
+                "authUi" : "com.firebaseui:firebase-ui-auth:${versions.authUi}"
         ],
         "material"  : "com.google.android.material:material:${versions.material}",
         "picasso"   : "com.squareup.picasso:picasso:${versions.picasso}"

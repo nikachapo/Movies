@@ -1,7 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -65,6 +67,7 @@ dependencies {
     implementation deps.coroutines.core
     implementation deps.coroutines.android
     implementation deps.coroutines.test
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
 
     implementation deps.androidx.livedata
     implementation deps.androidx.viewmodel
@@ -77,5 +80,17 @@ dependencies {
     kapt deps.room.compiler
 
     implementation deps.picasso
+
+    implementation deps.firebase.realtime
+    implementation deps.firebase.auth
+    implementation deps.firebase.authUi
+    implementation 'com.google.firebase:firebase-storage-ktx:19.2.0'
+
+//    RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.6'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    // RxJava support for Room
+    implementation 'androidx.room:room-rxjava2:2.2.6'
+
 
 }

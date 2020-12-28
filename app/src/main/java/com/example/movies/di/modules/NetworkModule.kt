@@ -1,4 +1,4 @@
-package com.example.movies.di
+package com.example.movies.di.modules
 
 import com.example.movies.api.MoviesService
 import com.example.movies.api.MoviesService.Companion.BASE_URL
@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [FirebaseModule::class])
 class NetworkModule {
 
     @Singleton

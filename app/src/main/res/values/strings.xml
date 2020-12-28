@@ -6,4 +6,17 @@
     <string name="genres">Genre</string>
     <string name="movie_poster_transition">moviePosterTrans</string>
     <string name="reviews">Reviews</string>
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="enter_valid_size_text">Enter valid size text</string>
+    <string name="not_valid">Not Valid</string>
+    <string name="user_name">User Name</string>
+    <string name="registration_failed">Registration Failed !</string>
+    <string name="choose_profile_image">Choose Profile Image</string>
+    <string name="next">Next</string>
+    <string name="data_stored_success">Data Stored Successfully</string>
+    <string name="finish">Finish</string>
 </resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--    TODO add proper image-->
+    <ImageView
+        android:id="@+id/chooseProfileIV"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/margin_to_edge"
+        android:gravity="center_horizontal"
+        android:text="@string/choose_profile_image"
+        android:textColor="@color/def_text_color"
+        android:textSize="@dimen/button_txt_size" />
+
+</FrameLayout>
