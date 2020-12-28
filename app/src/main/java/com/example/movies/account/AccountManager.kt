@@ -1,5 +1,6 @@
 package com.example.movies.account
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.example.movies.db.AccountRepositoryImpl
 import com.example.movies.di.modules.SharedPref
@@ -51,9 +52,14 @@ class AccountManager @Inject constructor(
         return accountRepository.syncAccountData(firebaseAuth.currentUser!!.uid)
     }
 
+    @SuppressLint("CheckResult")
     suspend fun registerAccount(account: Account) = withContext(IO) {
         if (isLoggedInWithFirebase && accountRepository.register(account)) {
-            currentAccount = account
+            accountRepository.insertAccount(account).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete {
+                    currentAccount = account
+                }
             localStorage.setObjectAtLocation(KEY_ACCOUNT_ID, firebaseAuth.currentUser!!.uid)
             return@withContext true
         }

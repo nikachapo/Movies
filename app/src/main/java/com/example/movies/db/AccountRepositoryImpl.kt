@@ -12,6 +12,10 @@ class AccountRepositoryImpl @Inject constructor(
     private val accountDao: AccountDao
 ) : AccountRepository {
 
+    override fun insertAccount(account: Account): Completable {
+        return accountDao.insertAccount(account)
+    }
+
     override suspend fun syncAccountData(id: String): Boolean {
         remote.fetchAccountData(id)?.run {
             accountDao.insertAccount(this)
@@ -23,7 +27,6 @@ class AccountRepositoryImpl @Inject constructor(
     override fun getAccount(id: String) = accountDao.getAccount(id)
 
     override suspend fun register(account: Account): Boolean {
-        accountDao.insertAccount(account)
         return remote.registerAccount(account)
     }
 

@@ -9,7 +9,7 @@ import io.reactivex.Flowable
 interface AccountDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAccount(account: Account)
+    fun insertAccount(account: Account): Completable
 
     @Query("select * from Account where id = :id")
     fun getAccount(id: String) : Flowable<Account>
