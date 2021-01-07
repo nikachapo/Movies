@@ -1,18 +1,18 @@
 package com.example.movies.ui.movies_list
 
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.movies.R
 
-abstract class MovieListPresenterBaseFragment(layoutManager: LayoutManager) : Fragment() {
+abstract class MovieListPresenterBaseFragment(protected val layoutManager: LayoutManager) : Fragment() {
 
     protected var movieListFragment: MoviesListFragment? = null
-    protected var currentManager: LayoutManager = layoutManager
 
     abstract val containerId: Int
 
     abstract fun showData()
+
+    abstract fun setLayoutManagerAndOrientation()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,23 +26,13 @@ abstract class MovieListPresenterBaseFragment(layoutManager: LayoutManager) : Fr
 
     private fun setUpFragmentList(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
-            movieListFragment = MoviesListFragment.newInstance(currentManager)
+            movieListFragment = MoviesListFragment.newInstance(layoutManager)
             childFragmentManager.beginTransaction()
                 .add(containerId, movieListFragment!!).commit()
         } else {
             movieListFragment =
                 childFragmentManager.findFragmentById(containerId) as MoviesListFragment?
         }
-    }
-
-    protected fun ImageView.changeLayoutManager() {
-        currentManager = if (currentManager == LayoutManager.GRID) {
-            LayoutManager.LINEAR
-        } else {
-            LayoutManager.GRID
-        }
-        setBackgroundResource(getDrawableIdForIV(currentManager))
-        movieListFragment?.changeLayoutManager(currentManager)
     }
 
     protected fun getDrawableIdForIV(layoutManager: LayoutManager): Int {

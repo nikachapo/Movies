@@ -27,9 +27,6 @@ import java.io.Serializable
 class MoviesListFragment : Fragment(), MoviesListTemplate {
 
     private lateinit var listLayoutManager: RecyclerView.LayoutManager
-    private lateinit var currentLayoutManager: LayoutManager
-    private lateinit var currentOrientation: Orientation
-
     override lateinit var mView: View
     override val binding: FragmentMoviesListBinding by lazy { FragmentMoviesListBinding.bind(mView) }
     private lateinit var adapter: MoviesAdapter
@@ -41,26 +38,14 @@ class MoviesListFragment : Fragment(), MoviesListTemplate {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mView = inflater.inflate(R.layout.fragment_movies_list, container, false)
         setUpViews()
         initAdapter()
         return mView
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putSerializable(ARG_LAYOUT_MANAGER, currentLayoutManager)
-        outState.putSerializable(ARG_ORIENTATION, currentOrientation)
-    }
-
-    override fun handleArguments(arguments: Bundle?) {
-        arguments?.let {
-            val orientation = it.getSerializable(ARG_ORIENTATION) as Orientation
-            val layoutManager = it.getSerializable(ARG_LAYOUT_MANAGER) as LayoutManager
-            changeLayoutManager(layoutManager, orientation)
-        }
-    }
+    override fun handleArguments(arguments: Bundle?) {}
 
     override suspend fun submitData(data: PagingData<MovieModel>) {
         adapter.submitData(data)
@@ -71,12 +56,10 @@ class MoviesListFragment : Fragment(), MoviesListTemplate {
     }
 
     override fun changeLayoutManager(currentManager: LayoutManager, orientation: Orientation) {
-        currentOrientation = orientation
-        val mOrientation = when (currentOrientation) {
+        val mOrientation = when (orientation) {
             Orientation.VERTICAL -> LinearLayoutManager.VERTICAL
             Orientation.HORIZONTAL -> LinearLayoutManager.HORIZONTAL
         }
-        currentLayoutManager = currentManager
         listLayoutManager = when (currentManager) {
             LayoutManager.LINEAR -> LinearLayoutManager(context, mOrientation, false)
             LayoutManager.GRID -> GridLayoutManager(context, 2)
@@ -87,7 +70,6 @@ class MoviesListFragment : Fragment(), MoviesListTemplate {
     }
 
     override fun setUpViews() {
-        binding.list.layoutManager = listLayoutManager
         binding.retryButton.setOnClickListener { adapter.retry() }
     }
 

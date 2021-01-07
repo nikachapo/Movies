@@ -36,6 +36,10 @@ class SearchTVShowsFragment : MovieListPresenterBaseFragment(LayoutManager.LINEA
         search(lastSearchQuery)
     }
 
+    override fun setLayoutManagerAndOrientation() {
+        viewModel.setLayoutManagerAndOrientation()
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity as MainActivity).appComponent.inject(this)
