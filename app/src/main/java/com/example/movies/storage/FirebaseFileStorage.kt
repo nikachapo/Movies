@@ -25,8 +25,9 @@ class FirebaseFileStorage @Inject constructor(
             }
     }
 
-    override suspend fun setObjectAtLocation(key: DatabaseReference, value: Uri): Boolean {
+    override suspend fun setObjectAtLocation(key: DatabaseReference, value: Uri?): Boolean {
         return try {
+            if (value == null) return false
             key.child(KEY_PHOTO_URL)
                 .setValue(putFileToStorage(value))
                 .await()

@@ -10,7 +10,7 @@ import com.example.movies.network.AccountRemoteService
 import dagger.Module
 import dagger.Provides
 
-@Module
+@Module(includes = [DispatchersModule::class])
 class AppModule {
 
     @Provides

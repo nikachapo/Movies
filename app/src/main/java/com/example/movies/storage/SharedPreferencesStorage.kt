@@ -16,8 +16,9 @@ class SharedPreferencesStorage @Inject constructor(context: Context): Storage<St
         return storage.getString(key, "")
     }
 
-    override suspend fun setObjectAtLocation(key: String, value: String): Boolean {
+    override suspend fun setObjectAtLocation(key: String, value: String?): Boolean {
         return try {
+            if (value == null) return false
             storage.edit().putString(key, value).apply()
             true
         }catch (e: Exception){
