@@ -1,8 +1,7 @@
 package com.example.movies.account
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
-import com.example.movies.MainCoroutineRule
+import com.example.movies.BaseCoroutinesTest
 import com.example.movies.db.AccountRepository
 import com.example.movies.db.AccountRepositoryImpl
 import com.example.movies.fakes.FakeAccountDao
@@ -19,7 +18,6 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -29,13 +27,7 @@ import org.robolectric.RobolectricTestRunner
 
 @ExperimentalCoroutinesApi
 @RunWith(RobolectricTestRunner::class)
-class AccountManagerTest {
-
-    @get:Rule
-    var mainCoroutineRule = MainCoroutineRule()
-
-    @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
+class AccountManagerTest : BaseCoroutinesTest(){
 
     private lateinit var accountManager: AccountManager
     private lateinit var accountRepository: AccountRepository
@@ -132,7 +124,7 @@ class AccountManagerTest {
         val mockTask: Task<Void> = mock(Task::class.java) as Task<Void>
         mainCoroutineRule.runBlockingTest {
             `when`(firebaseAuthUI.signOut(ApplicationProvider.getApplicationContext())).thenReturn(mockTask)
-            mockTask.onSuccessTask<Void> {
+            mockTask.onSuccessTask {
                 return@onSuccessTask mockTask
             }
             fakeLocalStorage.setObjectAtLocation(KEY_ACCOUNT_ID, account.id)
