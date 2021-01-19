@@ -11,6 +11,7 @@ import com.example.movies.ui.MainActivity
 import com.example.movies.ui.login.LoginActivity
 import com.example.movies.ui.movie_details.MovieDetailsActivity
 import com.example.movies.ui.popular_tv_shows.PopularTVShowsFragment
+import com.example.movies.ui.profile.AccountProfileFragment
 import com.example.movies.ui.search_tv_shows.SearchTVShowsFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -43,4 +44,5 @@ interface AppComponent {
     fun inject(popularTVShowsFragment: PopularTVShowsFragment)
     fun inject(searchTVShowsFragment: SearchTVShowsFragment)
     fun inject(movieDetailsActivity: MovieDetailsActivity)
+    fun inject(accountProfileFragment: AccountProfileFragment)
 }

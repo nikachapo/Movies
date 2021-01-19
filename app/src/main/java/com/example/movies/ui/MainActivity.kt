@@ -8,6 +8,7 @@ import com.example.movies.R
 import com.example.movies.databinding.ActivityMainBinding
 import com.example.movies.di.AppComponent
 import com.example.movies.ui.popular_tv_shows.PopularTVShowsFragment
+import com.example.movies.ui.profile.AccountProfileFragment
 import com.example.movies.ui.search_tv_shows.SearchTVShowsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -42,8 +43,19 @@ class MainActivity : AppCompatActivity() {
             searching = true
             binding.toolbarLayout.searchMovieEt.visibility = View.VISIBLE
             binding.toolbarLayout.searchBtn.visibility = View.GONE
+            binding.toolbarLayout.accountBtn.visibility = View.GONE
+
             supportFragmentManager.beginTransaction()
                 .add(R.id.mainContainer, SearchTVShowsFragment.newInstance())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.toolbarLayout.accountBtn.setOnClickListener {
+            searching = false
+            binding.toolbarLayout.searchBtn.visibility = View.GONE
+            supportFragmentManager.beginTransaction()
+                .add(R.id.mainContainer, AccountProfileFragment())
                 .addToBackStack(null)
                 .commit()
         }
@@ -58,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         if (supportFragmentManager.backStackEntryCount > 0) {
             binding.toolbarLayout.searchMovieEt.visibility = View.GONE
             binding.toolbarLayout.searchBtn.visibility = View.VISIBLE
+            binding.toolbarLayout.accountBtn.visibility = View.VISIBLE
             supportFragmentManager.popBackStack()
             searching = false
         } else {

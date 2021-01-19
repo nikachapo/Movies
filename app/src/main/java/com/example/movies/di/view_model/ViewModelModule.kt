@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.movies.ui.login.LoginViewModel
 import com.example.movies.ui.movie_details.MovieDetailsViewModel
 import com.example.movies.ui.popular_tv_shows.PopularTVShowsViewModel
+import com.example.movies.ui.profile.AccountProfileViewModel
 import com.example.movies.ui.registration.choose_picture.PictureChooseViewModel
 import com.example.movies.ui.registration.enter_details.EnterDetailsViewModel
 import com.example.movies.ui.search_tv_shows.SearchTVShowsViewModel
@@ -51,6 +52,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MovieDetailsViewModel::class)
     abstract fun bindMovieDetViewModel(movieDetailsViewModel: MovieDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountProfileViewModel::class)
+    abstract fun bindAccDetailsViewModel(accountProfileViewModel: AccountProfileViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: DaggerViewModelFactory): ViewModelProvider.Factory
