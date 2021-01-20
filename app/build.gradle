@@ -96,4 +96,7 @@ dependencies {
     implementation deps.firebase.auth
     implementation deps.firebase.authUi
     implementation 'com.google.firebase:firebase-storage-ktx:19.2.0'
+
+    implementation "androidx.fragment:fragment-ktx:1.2.5"
+
 }

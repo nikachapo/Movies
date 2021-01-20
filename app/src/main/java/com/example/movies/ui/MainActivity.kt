@@ -3,6 +3,7 @@ package com.example.movies.ui
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
 import com.example.movies.App
 import com.example.movies.R
 import com.example.movies.databinding.ActivityMainBinding
@@ -54,10 +55,16 @@ class MainActivity : AppCompatActivity() {
         binding.toolbarLayout.accountBtn.setOnClickListener {
             searching = false
             binding.toolbarLayout.searchBtn.visibility = View.GONE
-            supportFragmentManager.beginTransaction()
-                .add(R.id.mainContainer, AccountProfileFragment())
-                .addToBackStack(null)
-                .commit()
+            supportFragmentManager.commit {
+                setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
+                add(R.id.mainContainer, AccountProfileFragment())
+                addToBackStack(null)
+            }
         }
     }
 
