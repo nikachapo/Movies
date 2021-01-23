@@ -70,7 +70,7 @@
     </style>
 
     <style name="AuthUiTheme" parent="Base.Theme.Movies">
-        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowBackground">@mipmap/login_bg</item>
     </style>
 
 </resources>
