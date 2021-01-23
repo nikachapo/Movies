@@ -47,7 +47,7 @@ class PictureChooseFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = PictureChooseFragmentBinding.bind(
             inflater.inflate(R.layout.picture_choose_fragment, container, false)
         )

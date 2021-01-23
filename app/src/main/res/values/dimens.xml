@@ -23,4 +23,10 @@
     <dimen name="button_txt_size">20sp</dimen>
     <dimen name="margin_to_edge">20sp</dimen>
     <dimen name="big_image_size">200dp</dimen>
+
+    <dimen name="small_margin">4dp</dimen>
+    <dimen name="average_margin">8dp</dimen>
+    <dimen name="big_margin">16dp</dimen>
+    <dimen name="large_margin">16dp</dimen>
+
 </resources>

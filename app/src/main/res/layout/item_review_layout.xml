@@ -18,15 +18,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Author"
-            android:textSize="@dimen/def_text_size"
-            android:textColor="@android:color/black" />
+            style="@style/TextAppearance.MaterialComponents.Headline6"/>
 
         <TextView
             android:id="@+id/reviewTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"
-            android:textColor="@android:color/black" />
+            style="@style/TextAppearance.MaterialComponents.Body1" />
 
     </LinearLayout>
 

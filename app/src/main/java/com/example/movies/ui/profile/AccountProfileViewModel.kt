@@ -6,12 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movies.account.AccountManager
+import com.example.movies.data.IMovieRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AccountProfileViewModel
-@Inject constructor(private val accountManager: AccountManager,
-                    private val context: Context) : ViewModel() {
+@Inject constructor(
+    private val accountManager: AccountManager,
+    private val context: Context
+) : ViewModel() {
 
     val currentAccount = accountManager.currentAccount
 
