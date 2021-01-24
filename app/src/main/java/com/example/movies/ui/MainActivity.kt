@@ -11,6 +11,7 @@ import com.example.movies.di.AppComponent
 import com.example.movies.ui.popular_tv_shows.PopularTVShowsFragment
 import com.example.movies.ui.profile.AccountProfileFragment
 import com.example.movies.ui.search_tv_shows.SearchTVShowsFragment
+import java.lang.RuntimeException
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,10 +28,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbarLayout.searchToolbar)
-
-        binding.testCrashBtn.setOnClickListener {
-            throw RuntimeException("Test Crash")
-        }
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -70,6 +67,10 @@ class MainActivity : AppCompatActivity() {
                 addToBackStack(null)
             }
         }
+    }
+
+    fun testCrash(view: View) {
+        throw RuntimeException("Test Crash")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
