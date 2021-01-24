@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbarLayout.searchToolbar)
 
+        binding.testCrashBtn.setOnClickListener {
+            throw RuntimeException("Test Crash")
+        }
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.mainContainer, PopularTVShowsFragment.newInstance())

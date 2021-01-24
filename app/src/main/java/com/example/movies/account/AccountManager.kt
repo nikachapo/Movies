@@ -10,6 +10,7 @@ import com.example.movies.storage.Storage
 import com.example.movies.utils.util.KEY_ACCOUNT_ID
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -47,6 +48,7 @@ class AccountManager @Inject constructor(
                 if (isNotEmpty()) {
                     _currentAccount.addSource(accountRepository.getAccount(this)) {
                         _currentAccount.value = it
+                        FirebaseCrashlytics.getInstance().setUserId(it.id)
                     }
                     return true
                 }
@@ -62,6 +64,7 @@ class AccountManager @Inject constructor(
     suspend fun registerAccount(account: Account) = withContext(ioDispatcher) {
         if (isLoggedInWithFirebase && accountRepository.register(account)) {
             _currentAccount.postValue(account)
+            FirebaseCrashlytics.getInstance().setUserId(account.id)
             localStorage.setObjectAtLocation(KEY_ACCOUNT_ID, currentFirebaseUID)
             return@withContext true
         }

@@ -9,6 +9,12 @@
         android:id="@+id/toolbarLayout"
         layout="@layout/search_toolbar_layout" />
 
+    <Button
+        android:id="@+id/testCrashBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Test crash"/>
     <FrameLayout
         android:id="@+id/mainContainer"
         android:layout_width="match_parent"
