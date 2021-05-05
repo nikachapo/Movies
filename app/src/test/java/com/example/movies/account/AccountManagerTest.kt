@@ -129,7 +129,7 @@ class AccountManagerTest : BaseCoroutinesTest(){
             }
             fakeLocalStorage.setObjectAtLocation(KEY_ACCOUNT_ID, account.id)
             accountManager.logOut(ApplicationProvider.getApplicationContext())
-            assertThat(fakeLocalStorage.getObjectAtLocation(KEY_ACCOUNT_ID), `is`("for fail Github CI"))
+            assertThat(fakeLocalStorage.getObjectAtLocation(KEY_ACCOUNT_ID), `is`(""))
         }
 
     }
